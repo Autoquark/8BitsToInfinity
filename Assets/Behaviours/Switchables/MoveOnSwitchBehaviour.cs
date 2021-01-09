@@ -19,53 +19,31 @@ namespace Assets.Behaviours.Switchables
 
         private Vector3 _unswitchedPosition;
         private Quaternion _unswitchedRotation;
-        private bool _pendingSwitch = false;
-        private bool _isSwitched = false;
-        private bool _isSwitching = false;
         private float _moveSpeed;
+        private float _rotateSpeed;
+        private readonly Lazy<ControllerBehaviour> _controller;
+
+        public MoveOnSwitchBehaviour()
+        {
+            _controller = new Lazy<ControllerBehaviour>(() => FindObjectOfType<ControllerBehaviour>());
+        }
 
         private void Awake()
         {
             _unswitchedPosition = transform.position;
             _unswitchedRotation = transform.rotation;
-        }
-
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.Space) && !_isSwitching)
-            {
-                _pendingSwitch = true;
-            }
+            _moveSpeed = (_movement.magnitude / _switchingDuration) * Time.fixedDeltaTime;
+            _rotateSpeed = (Quaternion.Angle(transform.rotation, _rotation) / _switchingDuration) * Time.fixedDeltaTime;
         }
 
         private void FixedUpdate()
         {
-            if(_pendingSwitch)
-            {
-                _pendingSwitch = false;
-                StartCoroutine(Switch());
-            }
-        }
-
-        private IEnumerator Switch()
-        {
-            var moveSpeedPerUpdate = (_movement.magnitude / _switchingDuration) * Time.fixedDeltaTime;
-            var targetPosition = _isSwitched ? _unswitchedPosition : _unswitchedPosition + _movement;
-            var targetRotation = _isSwitched ? _unswitchedRotation : _unswitchedRotation * _rotation;
+            var targetPosition = _controller.Value.IsSwitched ? _unswitchedPosition + _movement : _unswitchedPosition;
+            var targetRotation = _controller.Value.IsSwitched ? _unswitchedRotation * _rotation : _unswitchedRotation;
             targetRotation.Normalize();
-            var rotateSpeedPerUpdate = (Quaternion.Angle(transform.rotation, targetRotation) / _switchingDuration) * Time.fixedDeltaTime;
-            var startTime = Time.fixedTime;
-            _isSwitching = true;
 
-            while (Time.fixedTime < startTime + _switchingDuration)
-            {
-                GetComponent<Rigidbody>().MoveRotation(Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeedPerUpdate));
-                GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(transform.position, targetPosition, moveSpeedPerUpdate));
-                yield return null;
-            }
-
-            _isSwitching = false;
-            _isSwitched = !_isSwitched;
+            GetComponent<Rigidbody>().MoveRotation(Quaternion.RotateTowards(transform.rotation, targetRotation, _rotateSpeed));
+            GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(transform.position, targetPosition, _moveSpeed));
         }
     }
 }

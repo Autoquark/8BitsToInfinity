@@ -815,6 +815,49 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1475505913951231443}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2046366693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2046366695}
+  - component: {fileID: 2046366694}
+  m_Layer: 0
+  m_Name: Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2046366694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046366693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd98c04d9aa8d148b37dc87ac2625a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2046366695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046366693}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.1795, y: 0.29038966, z: -5.392098}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2085001261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -968,12 +1011,12 @@ PrefabInstance:
     - target: {fileID: 2719246750867063215, guid: 3c956a4432e613143b2a270a57c2b814,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 2719246750867063215, guid: 3c956a4432e613143b2a270a57c2b814,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.75
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2719246750867063215, guid: 3c956a4432e613143b2a270a57c2b814,
         type: 3}
@@ -1014,6 +1057,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739736663796151288, guid: 3c956a4432e613143b2a270a57c2b814,
+        type: 3}
+      propertyPath: _switchingDuration
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5087532229978364928, guid: 3c956a4432e613143b2a270a57c2b814,
         type: 3}
