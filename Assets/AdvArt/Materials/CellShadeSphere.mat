@@ -88,6 +88,8 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _offset: {r: 0, g: 0.16, b: 0, a: 0}
 --- !u!114 &1885819567205529181
 MonoBehaviour:
   m_ObjectHideFlags: 11
