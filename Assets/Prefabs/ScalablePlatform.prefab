@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490916942986769847}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
   m_LocalScale: {x: 0.8, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 981280746921702167}
@@ -339,7 +339,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1553041310569825467}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.45, y: 0.050000004, z: 0}
+  m_LocalPosition: {x: 0.45, y: 0.1, z: 0}
   m_LocalScale: {x: 0.099999994, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 981280746921702167}
@@ -650,8 +650,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095538351803524332}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.050000004, z: 0.5}
-  m_LocalScale: {x: 1, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalScale: {x: 1, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 981280746921702167}
   m_RootOrder: 4
@@ -961,8 +961,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6387197544338486692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.050000004, z: -0.5}
-  m_LocalScale: {x: 1, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalScale: {x: 1, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 981280746921702167}
   m_RootOrder: 3
@@ -1272,7 +1272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6433402008445617864}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.45, y: 0.050000004, z: 0}
+  m_LocalPosition: {x: -0.45, y: 0.1, z: 0}
   m_LocalScale: {x: 0.099999994, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 981280746921702167}
@@ -1603,8 +1603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e445a32fb6308d440a0c7f7d9b777593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftEdge: 1
-  RightEdge: 1
+  LeftEdge: 0.2
+  RightEdge: 0.2
   FrontEdge: 0
   BackEdge: 0
   Width: 1

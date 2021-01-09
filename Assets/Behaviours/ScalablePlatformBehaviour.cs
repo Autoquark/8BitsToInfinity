@@ -12,13 +12,13 @@ namespace Assets.Behaviours.Editor
     class ScalablePlatformBehaviour : MonoBehaviour
     {
         [SerializeField]
-        bool LeftEdge = true;
+        float LeftEdge = 0.2f;
         [SerializeField]
-        bool RightEdge = true;
+        float RightEdge = 0.2f;
         [SerializeField]
-        bool FrontEdge = false;
+        float FrontEdge = 0.0f;
         [SerializeField]
-        bool BackEdge = false;
+        float BackEdge = 0.0f;
         [SerializeField]
         int Width = 1;
         [SerializeField]
@@ -38,9 +38,9 @@ namespace Assets.Behaviours.Editor
         {
             Vector3 scale = p2 - p1;
 
-            UnityEngine.Assertions.Assert.IsTrue(scale.x >= 0);
-            UnityEngine.Assertions.Assert.IsTrue(scale.y >= 0);
-            UnityEngine.Assertions.Assert.IsTrue(scale.z >= 0);
+            //UnityEngine.Assertions.Assert.IsTrue(scale.x >= 0);
+            //UnityEngine.Assertions.Assert.IsTrue(scale.y >= 0);
+            //UnityEngine.Assertions.Assert.IsTrue(scale.z >= 0);
 
             Vector3 centre = (p1 + p2) / 2;
 
@@ -50,25 +50,32 @@ namespace Assets.Behaviours.Editor
 
         void OnValidate()
         {
-            LeftRim.SetActive(LeftEdge);
-            RightRim.SetActive(RightEdge);
-            FrontRim.SetActive(FrontEdge);
-            BackRim.SetActive(BackEdge);
+            bool left_edge_on = LeftEdge > 0.1f;
+            bool right_edge_on = RightEdge > 0.1f;
+            bool front_edge_on = FrontEdge > 0.1f;
+            bool back_edge_on = BackEdge > 0.1f;
 
-            float left_full = -Width / 2.0f;
-            float left_adj = left_full + (LeftEdge ? 0.1f : 0.0f);
-            float right_full = Width / 2.0f;
-            float right_adj = right_full - (RightEdge ? 0.1f : 0.0f);
-            float front_full = -Length / 2.0f;
-            float front_adj = front_full + (FrontEdge ? 0.1f : 0.0f);
-            float back_full = Length / 2.0f;
-            float back_adj = back_full - (BackEdge ? 0.1f : 0.0f);
+            LeftRim.SetActive(left_edge_on);
+            RightRim.SetActive(right_edge_on);
+            FrontRim.SetActive(front_edge_on);
+            BackRim.SetActive(back_edge_on);
 
-            SetUnitObjectBetweenPositions(new Vector3(left_adj, -0.05f, front_adj), new Vector3(right_adj, 0.05f, back_adj), Base.transform);
-            SetUnitObjectBetweenPositions(new Vector3(left_full, -0.05f, front_full), new Vector3(left_adj, 0.15f, back_full), LeftRim.transform);
-            SetUnitObjectBetweenPositions(new Vector3(right_adj, -0.05f, front_full), new Vector3(right_full, 0.15f, back_full), RightRim.transform);
-            SetUnitObjectBetweenPositions(new Vector3(left_full, -0.05f, front_full), new Vector3(right_full, 0.15f, front_adj), FrontRim.transform);
-            SetUnitObjectBetweenPositions(new Vector3(left_full, -0.05f, back_adj), new Vector3(right_full, 0.15f, back_full), BackRim.transform);
+            float left_full = -0.5f;
+            float left_adj = left_full + (left_edge_on ? 0.1f : 0.0f);
+            float right_full = Width -0.5f;
+            float right_adj = right_full - (right_edge_on ? 0.1f : 0.0f);
+            float front_full = -0.5f;
+            float front_adj = front_full + (front_edge_on ? 0.1f : 0.0f);
+            float back_full = Length -0.5f;
+            float back_adj = back_full - (back_edge_on ? 0.1f : 0.0f);
+            float bottom = 0.0f;
+            float top = 0.1f;
+
+            SetUnitObjectBetweenPositions(new Vector3(left_adj, bottom, front_adj), new Vector3(right_adj, top, back_adj), Base.transform);
+            SetUnitObjectBetweenPositions(new Vector3(left_full, bottom, front_full), new Vector3(left_adj, top + LeftEdge - 0.1f, back_full), LeftRim.transform);
+            SetUnitObjectBetweenPositions(new Vector3(right_adj, bottom, front_full), new Vector3(right_full, top + RightEdge - 0.1f, back_full), RightRim.transform);
+            SetUnitObjectBetweenPositions(new Vector3(left_full, bottom, front_full), new Vector3(right_full, top + FrontEdge - 0.1f, front_adj), FrontRim.transform);
+            SetUnitObjectBetweenPositions(new Vector3(left_full, bottom, back_adj), new Vector3(right_full, top + BackEdge - 0.1f, back_full), BackRim.transform);
         }
     }
 }
