@@ -21,11 +21,11 @@ namespace Assets.Behaviours.Switchables
         private Quaternion _unswitchedRotation;
         private float _moveSpeed;
         private float _rotateSpeed;
-        private readonly Lazy<ControllerBehaviour> _controller;
+        private readonly Lazy<LevelControllerBehaviour> _controller;
 
         public MoveOnSwitchBehaviour()
         {
-            _controller = new Lazy<ControllerBehaviour>(() => FindObjectOfType<ControllerBehaviour>());
+            _controller = new Lazy<LevelControllerBehaviour>(() => FindObjectOfType<LevelControllerBehaviour>());
         }
 
         private void Awake()
@@ -44,6 +44,14 @@ namespace Assets.Behaviours.Switchables
 
             GetComponent<Rigidbody>().MoveRotation(Quaternion.RotateTowards(transform.rotation, targetRotation, _rotateSpeed));
             GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(transform.position, targetPosition, _moveSpeed));
+        }
+
+        private void OnDrawGizmos()
+        {
+            foreach(var child in GetComponentsInChildren<MeshFilter>())
+            {
+                Gizmos.DrawWireMesh(child.sharedMesh, child.transform.position + _movement, (child.transform.rotation * _rotation).normalized);
+            }
         }
     }
 }
