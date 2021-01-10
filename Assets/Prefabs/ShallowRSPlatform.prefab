@@ -283,12 +283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4739169fe48487e4e9b2d09771a0b49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LeftEdge: 0.6
-  RightEdge: 0.8
   LeftExtend: 0.3
   RightExtend: 0
   Base: {fileID: 1884712799444344801}
   LeftRim: {fileID: 4240093166190321683}
   RightRim: {fileID: 5034014952481316386}
-  LeftUpstand: {fileID: 0}
-  RightUpstand: {fileID: 0}

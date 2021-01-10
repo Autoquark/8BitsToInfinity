@@ -48,13 +48,16 @@ namespace Assets.Behaviours
                 var positionXZ = lookAt.transform.position - _pivotPointXZ;
                 positionXZ.y = 0;
                 positionXZ = positionXZ.normalized * (_minDistance + _maxDistance) / 2;
-                transform.position = new Vector3(positionXZ.x, transform.position.y, positionXZ.z);
-                transform.LookAt(lookAt.transform);
+                transform.position = _pivotPointXZ + new Vector3(positionXZ.x, transform.position.y, positionXZ.z);
+                //transform.LookAt(lookAt.transform);
             }
+            transform.LookAt(_pivotPointXZ, Vector3.up);
         }
 
         private void Update()
         {
+            Debug.DrawLine(_pivotPointXZ, new Vector3(_pivotPointXZ.x, 10, _pivotPointXZ.z), Color.green);
+
             // Left/right pivot around pivot point
             var xDelta = Input.GetMouseButton(0) ? Input.GetAxis("Mouse X") * _mousePivotSensitivity : 0;
             if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
