@@ -8,7 +8,6 @@ using UnityEngine;
 
 namespace Assets.Behaviours.Editor
 {
-    //    [ExecuteInEditMode]
     class ScalablePlatformBehaviour : MonoBehaviour
     {
         [SerializeField]
