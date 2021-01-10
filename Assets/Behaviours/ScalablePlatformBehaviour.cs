@@ -20,9 +20,13 @@ namespace Assets.Behaviours.Editor
         [SerializeField]
         float BackEdge = 0.0f;
         [SerializeField]
-        int Width = 1;
+        float LeftExtend = 0;
         [SerializeField]
-        int Length = 1;
+        float RightExtend = 0;
+        [SerializeField]
+        float FrontExtend = 0;
+        [SerializeField]
+        float BackExtend = 0;
         [SerializeField]
         GameObject Base;
         [SerializeField]
@@ -50,6 +54,11 @@ namespace Assets.Behaviours.Editor
 
         void OnValidate()
         {
+            LeftExtend = Mathf.Max(0.0f, LeftExtend);
+            RightExtend = Mathf.Max(0.0f, RightExtend);
+            FrontExtend = Mathf.Max(0.0f, FrontExtend);
+            BackExtend = Mathf.Max(0.0f, BackExtend);
+
             bool left_edge_on = LeftEdge > 0.1f;
             bool right_edge_on = RightEdge > 0.1f;
             bool front_edge_on = FrontEdge > 0.1f;
@@ -60,13 +69,13 @@ namespace Assets.Behaviours.Editor
             FrontRim.SetActive(front_edge_on);
             BackRim.SetActive(back_edge_on);
 
-            float left_full = -0.5f;
+            float left_full = -0.5f - LeftExtend;
             float left_adj = left_full + (left_edge_on ? 0.1f : 0.0f);
-            float right_full = Width -0.5f;
+            float right_full = 0.5f + RightExtend;
             float right_adj = right_full - (right_edge_on ? 0.1f : 0.0f);
-            float front_full = -0.5f;
+            float front_full = -0.5f - FrontExtend;
             float front_adj = front_full + (front_edge_on ? 0.1f : 0.0f);
-            float back_full = Length -0.5f;
+            float back_full = 0.5f + BackExtend;
             float back_adj = back_full - (back_edge_on ? 0.1f : 0.0f);
             float bottom = 0.0f;
             float top = 0.1f;
