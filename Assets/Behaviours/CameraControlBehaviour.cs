@@ -12,12 +12,21 @@ namespace Assets.Behaviours
     {
         private float _minY;
         private float _maxY;
+
         private float _mousePivotSensitivity = 500;
         private float _mousePanSensitivity = 150;
+        private float _mouseRotateSensitivity = 200;
+
         private float _keyboardPivotSensitivity = 50;
-        private float _keyboardPanSensitivity = 40;
+        private float _keyboardPanSensitivity = 20;
+        private float _keyboardRotateSensitivity = 150;
+
         private float _maxDistance = 20;
         private float _minDistance = 5;
+
+        private float _maxXAngle = 60;
+        private float _minXAngle = 0;
+
         // The point with y = 0 on the axis which the camera should pivot around
         private Vector3 _pivotPointXZ = Vector3.zero;
 
@@ -44,6 +53,7 @@ namespace Assets.Behaviours
 
         private void Update()
         {
+            // Left/right pivot around pivot point
             var xDelta = Input.GetMouseButton(0) ? Input.GetAxis("Mouse X") * _mousePivotSensitivity : 0;
             if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             {
@@ -55,6 +65,7 @@ namespace Assets.Behaviours
             }
             transform.RotateAround(_pivotPointXZ, Vector3.up, xDelta * Time.deltaTime);
 
+            // Up/down pan
             var yDelta = Input.GetMouseButton(0) ? Input.GetAxis("Mouse Y") * _mousePanSensitivity : 0;
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
@@ -66,11 +77,19 @@ namespace Assets.Behaviours
             }
             transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y + yDelta * Time.deltaTime, _minY, _maxY), transform.position.z);
 
+            // 'zoom' - adjusts camera distance from pivot
             var zDelta = -Input.mouseScrollDelta.y;
             var currentDistance = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), _pivotPointXZ);
             var distance = Mathf.Clamp(currentDistance + zDelta, _minDistance, _maxDistance);
             var newPositionXZ = _pivotPointXZ + (new Vector3(transform.position.x, 0, transform.position.z) - _pivotPointXZ).normalized * distance;
             transform.position = new Vector3(newPositionXZ.x, transform.position.y, newPositionXZ.z);
+
+            // Camera up/down rotation
+            yDelta = Input.GetMouseButton(1) ? Input.GetAxis("Mouse Y") * _mouseRotateSensitivity : 0;
+            transform.rotation = Quaternion.Euler(
+                Mathf.Clamp(transform.rotation.eulerAngles.x + yDelta * Time.deltaTime, _minXAngle, _maxXAngle),
+                transform.rotation.eulerAngles.y,
+                transform.rotation.eulerAngles.z);
         }
     }
 }
