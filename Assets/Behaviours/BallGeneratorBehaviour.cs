@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class BallGeneratorBehaviour : MonoBehaviour
 {
+    public int RemainingBalls => _spawnCount;
+
+    [SerializeField]
+    private int _spawnCount = -1;
     [SerializeField]
     private float _interval = 2;
 
@@ -17,6 +21,14 @@ public class BallGeneratorBehaviour : MonoBehaviour
         {
             Instantiate(CommonPrefabs.Instance.Ball, transform.position, Quaternion.identity);
             _lastSpawnTime = Time.fixedTime;
+            if(_spawnCount > 0)
+            {
+                _spawnCount--;
+                if(_spawnCount == 0)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 
