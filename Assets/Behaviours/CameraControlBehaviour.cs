@@ -10,7 +10,6 @@ namespace Assets.Behaviours
 {
     class CameraControlBehaviour : MonoBehaviour
     {
-        private Vector2 _previousMousePosition;
         private float _minY;
         private float _maxY;
         private float _mousePivotSensitivity = 500;
@@ -28,13 +27,12 @@ namespace Assets.Behaviours
             var bounds = FindObjectsOfType<CameraBoundBehaviour>();
             _minY = bounds.Min(x => x.transform.position.y);
             _maxY = bounds.Max(x => x.transform.position.y);
-            _previousMousePosition = Input.mousePosition;
             transform.LookAt(new Vector3(0, (_minY + _maxY) / 2));
         }
 
         private void Update()
         {
-            var xDelta = Input.GetAxis("Mouse X") * _mousePivotSensitivity;
+            var xDelta = Input.GetMouseButton(0) ? Input.GetAxis("Mouse X") * _mousePivotSensitivity : 0;
             if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             {
                 xDelta -= _keyboardPivotSensitivity;
@@ -44,9 +42,8 @@ namespace Assets.Behaviours
                 xDelta += _keyboardPivotSensitivity;
             }
             transform.RotateAround(_pivotPointXZ, Vector3.up, xDelta * Time.deltaTime);
-            _previousMousePosition = Input.mousePosition;
 
-            var yDelta = Input.GetAxis("Mouse Y") * _mousePanSensitivity;
+            var yDelta = Input.GetMouseButton(0) ? Input.GetAxis("Mouse Y") * _mousePanSensitivity : 0;
             if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             {
                 yDelta += _keyboardPanSensitivity;
