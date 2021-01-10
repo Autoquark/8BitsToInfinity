@@ -16,7 +16,7 @@ namespace Assets.Behaviours
         private float _mousePanSensitivity = 150;
         private float _keyboardPivotSensitivity = 50;
         private float _keyboardPanSensitivity = 40;
-        private float _maxDistance = 50;
+        private float _maxDistance = 20;
         private float _minDistance = 5;
         // The point with y = 0 on the axis which the camera should pivot around
         private Vector3 _pivotPointXZ = Vector3.zero;
@@ -28,6 +28,18 @@ namespace Assets.Behaviours
             _minY = bounds.Min(x => x.transform.position.y);
             _maxY = bounds.Max(x => x.transform.position.y);
             transform.LookAt(new Vector3(0, (_minY + _maxY) / 2));
+            var geometry = GameObject.Find("LevelGeometry").transform.Children().ToList();
+            _pivotPointXZ = new Vector3((geometry.Min(t => t.position.x) + geometry.Max(t => t.position.x)) / 2, 0, (geometry.Min(t => t.position.z) + geometry.Max(t => t.position.z)) / 2);
+
+            var lookAt = FindObjectOfType<CameraLookAtStartBehaviour>();
+            if(lookAt != null)
+            {
+                var positionXZ = lookAt.transform.position - _pivotPointXZ;
+                positionXZ.y = 0;
+                positionXZ = positionXZ.normalized * (_minDistance + _maxDistance) / 2;
+                transform.position = new Vector3(positionXZ.x, transform.position.y, positionXZ.z);
+                transform.LookAt(lookAt.transform);
+            }
         }
 
         private void Update()
@@ -55,9 +67,9 @@ namespace Assets.Behaviours
             transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y + yDelta * Time.deltaTime, _minY, _maxY), transform.position.z);
 
             var zDelta = -Input.mouseScrollDelta.y;
-            var currentDistance = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(_pivotPointXZ.x, 0, _pivotPointXZ.z));
+            var currentDistance = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), _pivotPointXZ);
             var distance = Mathf.Clamp(currentDistance + zDelta, _minDistance, _maxDistance);
-            var newPositionXZ = (new Vector3(transform.position.x, 0, transform.position.z) - _pivotPointXZ).normalized * distance;
+            var newPositionXZ = _pivotPointXZ + (new Vector3(transform.position.x, 0, transform.position.z) - _pivotPointXZ).normalized * distance;
             transform.position = new Vector3(newPositionXZ.x, transform.position.y, newPositionXZ.z);
         }
     }

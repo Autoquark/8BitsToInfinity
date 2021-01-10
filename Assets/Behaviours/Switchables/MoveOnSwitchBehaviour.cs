@@ -30,6 +30,8 @@ namespace Assets.Behaviours.Switchables
 
         private void Awake()
         {
+            _rotation.Normalize();
+
             _unswitchedPosition = transform.position;
             _unswitchedRotation = transform.rotation;
             _moveSpeed = (_movement.magnitude / _switchingDuration) * Time.fixedDeltaTime;
@@ -50,7 +52,7 @@ namespace Assets.Behaviours.Switchables
         {
             foreach(var child in GetComponentsInChildren<MeshFilter>())
             {
-                Gizmos.DrawWireMesh(child.sharedMesh, child.transform.position + _movement, (child.transform.rotation * _rotation).normalized);
+                Gizmos.DrawWireMesh(child.sharedMesh, child.transform.position + _movement, (child.transform.rotation * _rotation).normalized, child.transform.lossyScale);
             }
         }
     }

@@ -17,6 +17,10 @@ namespace Assets.Behaviours
                 FindObjectOfType<LevelControllerBehaviour>().BallsInGoal++;
                 this.DestroyGameObject();
             }
+            else if(other.HasComponent<KillZoneBehaviour>())
+            {
+                this.DestroyGameObject();
+            }
         }
     }
 }
