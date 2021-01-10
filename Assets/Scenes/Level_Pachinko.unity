@@ -3017,5 +3017,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6920145252885972190, guid: b4076e81183b57f4f92a7eed8cf967f6,
+        type: 3}
+      propertyPath: BallsInGoalRequired
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4076e81183b57f4f92a7eed8cf967f6, type: 3}
