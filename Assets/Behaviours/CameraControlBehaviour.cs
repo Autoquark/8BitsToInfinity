@@ -27,6 +27,8 @@ namespace Assets.Behaviours
         private float _maxXAngle = 60;
         private float _minXAngle = 0;
 
+        private bool _invertRotation = true;
+
         // The point with y = 0 on the axis which the camera should pivot around
         private Vector3 _pivotPointXZ = Vector3.zero;
 
@@ -86,6 +88,7 @@ namespace Assets.Behaviours
 
             // Camera up/down rotation
             yDelta = Input.GetMouseButton(1) ? Input.GetAxis("Mouse Y") * _mouseRotateSensitivity : 0;
+            yDelta = _invertRotation ? -yDelta : yDelta;
             transform.rotation = Quaternion.Euler(
                 Mathf.Clamp(transform.rotation.eulerAngles.x + yDelta * Time.deltaTime, _minXAngle, _maxXAngle),
                 transform.rotation.eulerAngles.y,
