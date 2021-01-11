@@ -11,6 +11,7 @@ namespace Assets.Extensions
     {
         public static Vector2 ToVector2(this Vector3 vector) => vector;
 
+        public static Vector3 WithX(this Vector3 vector, float x) => new Vector3(x, vector.y, vector.z);
         public static Vector3 WithY(this Vector3 vector, float y) => new Vector3(vector.x, y, vector.z);
     }
 }

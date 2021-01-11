@@ -38,19 +38,11 @@ namespace Assets.Behaviours
             var bounds = FindObjectsOfType<CameraBoundBehaviour>();
             _minY = bounds.Min(x => x.transform.position.y);
             _maxY = bounds.Max(x => x.transform.position.y);
-            transform.LookAt(new Vector3(0, (_minY + _maxY) / 2));
+
+            //transform.LookAt(new Vector3(0, (_minY + _maxY) / 2));
             var geometry = GameObject.Find("LevelGeometry").transform.Children().ToList();
             _pivotPointXZ = new Vector3((geometry.Min(t => t.position.x) + geometry.Max(t => t.position.x)) / 2, 0, (geometry.Min(t => t.position.z) + geometry.Max(t => t.position.z)) / 2);
-
-            var lookAt = FindObjectOfType<CameraLookAtStartBehaviour>();
-            if(lookAt != null)
-            {
-                var positionXZ = lookAt.transform.position - _pivotPointXZ;
-                positionXZ.y = 0;
-                positionXZ = positionXZ.normalized * (_minDistance + _maxDistance) / 2;
-                transform.position = _pivotPointXZ + positionXZ.WithY(transform.position.y);
-            }
-            transform.LookAt(_pivotPointXZ.WithY(transform.position.y), Vector3.up);
+            transform.Rotate(0, Vector3.Angle(transform.forward.WithY(0), _pivotPointXZ - transform.position.WithY(0)), 0, Space.World);
         }
 
         private void Update()
