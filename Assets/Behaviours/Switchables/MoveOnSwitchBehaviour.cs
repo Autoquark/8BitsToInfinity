@@ -53,13 +53,18 @@ namespace Assets.Behaviours.Switchables
 
         private void OnDrawGizmos()
         {
-            foreach(var child in GetComponentsInChildren<MeshFilter>())
+            var originalPosition = transform.position;
+            var originalRotation = transform.rotation;
+            transform.position += _movement;
+            transform.rotation = _rotation.normalized * transform.rotation;
+
+            foreach (var child in GetComponentsInChildren<MeshFilter>())
             {
-                // Rotate each child's position around the position of this object
-                var offset = child.transform.position - transform.position;
-                offset = _rotation * offset;
-                Gizmos.DrawWireMesh(child.sharedMesh, transform.position + offset + _movement, (_rotation * child.transform.rotation).normalized, child.transform.lossyScale);
+                Gizmos.DrawWireMesh(child.sharedMesh, child.transform.position, child.transform.rotation, child.transform.lossyScale);
             }
+
+            transform.position = originalPosition;
+            transform.rotation = originalRotation;
         }
     }
 }
