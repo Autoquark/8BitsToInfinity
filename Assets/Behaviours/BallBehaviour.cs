@@ -10,6 +10,13 @@ namespace Assets.Behaviours
 {
     class BallBehaviour : MonoBehaviour
     {
+        private readonly Lazy<LevelControllerBehaviour> _levelController;
+
+        public BallBehaviour()
+        {
+            _levelController = new Lazy<LevelControllerBehaviour>(() => FindObjectOfType<LevelControllerBehaviour>());
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if(other.HasComponent<GoalZoneBehaviour>())
@@ -18,6 +25,14 @@ namespace Assets.Behaviours
                 this.DestroyGameObject();
             }
             else if(other.HasComponent<KillZoneBehaviour>())
+            {
+                this.DestroyGameObject();
+            }
+        }
+
+        private void Update()
+        {
+            if(transform.position.y < _levelController.Value.MinimumLevelGeometryY)
             {
                 this.DestroyGameObject();
             }

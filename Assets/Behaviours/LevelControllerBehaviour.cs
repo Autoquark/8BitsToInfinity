@@ -20,6 +20,8 @@ namespace Assets.Behaviours
 
         public bool IsSwitched { get; private set; } = false;
 
+        public float MinimumLevelGeometryY { get; private set; }
+
         private void Start()
         {
             var scene = SceneManager.GetActiveScene();
@@ -31,6 +33,9 @@ namespace Assets.Behaviours
             }
 
             _previousScene = scene.name;
+
+            MinimumLevelGeometryY = GameObject.Find("LevelGeometry").GetComponentsInChildren<Transform>()
+                .Min(x => x.position.y);
         }
 
         private void Update()

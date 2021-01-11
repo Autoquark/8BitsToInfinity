@@ -1474,6 +1474,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1009712455872844762, guid: b4076e81183b57f4f92a7eed8cf967f6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.6660385
+      objectReference: {fileID: 0}
+    - target: {fileID: 1009712455872844762, guid: b4076e81183b57f4f92a7eed8cf967f6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.167268
+      objectReference: {fileID: 0}
+    - target: {fileID: 1009712455872844762, guid: b4076e81183b57f4f92a7eed8cf967f6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.456825
+      objectReference: {fileID: 0}
     - target: {fileID: 6920145252885972190, guid: b4076e81183b57f4f92a7eed8cf967f6,
         type: 3}
       propertyPath: BallsInGoalRequired
