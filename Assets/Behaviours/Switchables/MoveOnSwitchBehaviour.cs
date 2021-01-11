@@ -58,8 +58,7 @@ namespace Assets.Behaviours.Switchables
                 // Rotate each child's position around the position of this object
                 var offset = child.transform.position - transform.position;
                 offset = _rotation * offset;
-                Gizmos.DrawWireMesh(child.sharedMesh, transform.position + offset, (_rotation * child.transform.rotation).normalized, child.transform.lossyScale);
-                //Gizmos.DrawWireMesh(child.sharedMesh, child.transform.position + _movement, (child.transform.rotation * _rotation).normalized, child.transform.lossyScale);
+                Gizmos.DrawWireMesh(child.sharedMesh, transform.position + offset + _movement, (_rotation * child.transform.rotation).normalized, child.transform.lossyScale);
             }
         }
     }
