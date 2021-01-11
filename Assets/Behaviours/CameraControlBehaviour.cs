@@ -42,7 +42,7 @@ namespace Assets.Behaviours
             //transform.LookAt(new Vector3(0, (_minY + _maxY) / 2));
             var geometry = GameObject.Find("LevelGeometry").transform.Children().ToList();
             _pivotPointXZ = new Vector3((geometry.Min(t => t.position.x) + geometry.Max(t => t.position.x)) / 2, 0, (geometry.Min(t => t.position.z) + geometry.Max(t => t.position.z)) / 2);
-            transform.Rotate(0, Vector3.Angle(transform.forward.WithY(0), _pivotPointXZ - transform.position.WithY(0)), 0, Space.World);
+            transform.Rotate(0, Vector3.SignedAngle(transform.forward.WithY(0), _pivotPointXZ - transform.position.WithY(0), Vector3.up), 0, Space.World);
         }
 
         private void Update()
