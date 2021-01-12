@@ -95,9 +95,7 @@ namespace Assets.Behaviours.Editor
             float width = LeftExtend + RightExtend + 1.0f;
 
             float left_full = -0.5f - LeftExtend;
-            float left_adj = left_full + (left_edge_on ? 0.05f * width : 0.0f);
             float right_full = 0.5f + RightExtend;
-            float right_adj = right_full - (right_edge_on ? 0.05f * width : 0.0f);
             float front_full = -0.5f;
             float back_full = 0.5f;
             float bottom = -0.9f;
@@ -105,7 +103,9 @@ namespace Assets.Behaviours.Editor
 
             SetUnitObjectBetweenPositions(new Vector3(left_full, bottom, front_full), new Vector3(right_full, top, back_full), Base.transform);
             LeftRim.transform.position = new Vector3(left_full, top, back_full);
-            RightRim.transform.position = new Vector3(right_full - 0.05f, top, back_full);
+            LeftRim.transform.localScale = new Vector3(width * 0.5f, 1, 1);
+            RightRim.transform.position = new Vector3(right_full - width * 0.05f, top, back_full);
+            RightRim.transform.localScale = new Vector3(width * 0.5f, 1, 1);
         }
     }
 }
