@@ -62,18 +62,22 @@ namespace Assets.Behaviours.Editor
         void SetMesh(Transform tr, SideType st)
         {
             var mf = tr.GetComponent<MeshFilter>();
+            var mc = tr.GetComponent<MeshCollider>();
 
             switch(st)
             {
                 case SideType.None:
+                    mc.sharedMesh = null;
                     break;
 
                 case SideType.Low:
                     mf.mesh = LowEdge.Value;
+                    mc.sharedMesh = LowEdge.Value;
                     break;
 
                 case SideType.High:
                     mf.mesh = HighEdge.Value;
+                    mc.sharedMesh = HighEdge.Value;
                     break;
             }
         }
@@ -102,9 +106,9 @@ namespace Assets.Behaviours.Editor
             float top = 0.1f;
 
             SetUnitObjectBetweenPositions(new Vector3(left_full, bottom, front_full), new Vector3(right_full, top, back_full), Base.transform);
-            LeftRim.transform.position = new Vector3(left_full, top, back_full);
+            LeftRim.transform.localPosition = new Vector3(left_full, top, back_full);
             LeftRim.transform.localScale = new Vector3(width * 0.5f, 1, 1);
-            RightRim.transform.position = new Vector3(right_full - width * 0.05f, top, back_full);
+            RightRim.transform.localPosition = new Vector3(right_full - width * 0.05f, top, back_full);
             RightRim.transform.localScale = new Vector3(width * 0.5f, 1, 1);
         }
     }
