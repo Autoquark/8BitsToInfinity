@@ -1,4 +1,5 @@
 ﻿using Assets.Behaviours;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,18 +15,18 @@ public class BallGeneratorBehaviour : MonoBehaviour
     [SerializeField]
     private float _delay = 0;
 
-    private float _levelStartTime = -1;
     private float _lastSpawnTime = -999;
+    private Lazy<LevelControllerBehaviour> _levelController;
 
-    private void Start()
+    public BallGeneratorBehaviour()
     {
-        _levelStartTime = Time.time;
+        _levelController = new Lazy<LevelControllerBehaviour>(FindObjectOfType<LevelControllerBehaviour>);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Time.time < _levelStartTime + _delay)
+        if(!_levelController.Value.LevelStarted || Time.time < _levelController.Value.LevelStartTime + _delay)
         {
             return;
         }
