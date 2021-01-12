@@ -22,6 +22,10 @@ namespace Assets.Behaviours
 
         public float MinimumLevelGeometryY { get; private set; }
 
+        public bool LevelStarted => LevelStartTime != -1;
+
+        public float LevelStartTime { get; private set; } = -1;
+
         public void RestartLevel()
         {
             var camera = FindObjectOfType<CameraControlBehaviour>();
@@ -56,6 +60,11 @@ namespace Assets.Behaviours
             if(Input.GetKeyDown(KeyCode.R))
             {
                 RestartLevel();
+            }
+
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                LevelStartTime = Time.time;
             }
         }
     }

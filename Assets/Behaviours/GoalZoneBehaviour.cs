@@ -13,8 +13,8 @@ namespace Assets.Behaviours
     {
         GoalZoneBehaviour()
         {
-            _levelController = new Lazy<LevelControllerBehaviour>(() => FindObjectOfType<LevelControllerBehaviour>());
-            _camera = new Lazy<Camera>(() => FindObjectOfType<Camera>());
+            _levelController = new Lazy<LevelControllerBehaviour>(FindObjectOfType<LevelControllerBehaviour>);
+            _camera = new Lazy<Camera>(FindObjectOfType<Camera>);
         }
 
         public int RequiredInThisZone = 0;

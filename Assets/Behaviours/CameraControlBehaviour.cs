@@ -82,6 +82,14 @@ namespace Assets.Behaviours
 
             // Camera up/down rotation
             yDelta = Input.GetMouseButton(1) ? Input.GetAxis("Mouse Y") * _mouseRotateSensitivity : 0;
+            if (Input.GetKey(KeyCode.E))
+            {
+                yDelta += _keyboardPanSensitivity;
+            }
+            else if (Input.GetKey(KeyCode.Q))
+            {
+                yDelta -= _keyboardPanSensitivity;
+            }
             yDelta = _invertRotation ? -yDelta : yDelta;
             transform.rotation = Quaternion.Euler(
                 Mathf.Clamp(transform.rotation.eulerAngles.x + yDelta * Time.deltaTime, _minXAngle, _maxXAngle),
