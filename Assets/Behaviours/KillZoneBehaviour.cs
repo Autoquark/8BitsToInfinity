@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,12 @@ namespace Assets.Behaviours
 {
     class KillZoneBehaviour : MonoBehaviour
     {
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.HasComponent<BallBehaviour>())
+            {
+                other.DestroyGameObject();
+            }
+        }
     }
 }

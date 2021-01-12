@@ -14,7 +14,7 @@ namespace Assets.Behaviours
         private static Quaternion _previousCameraRotation;
         private static string _previousScene;
 
-        public int BallsInGoalRequired = 1;
+        public int TotalBallsInGoalRequired = 1;
 
         public int BallsInGoal { get; set; } = 0;
 

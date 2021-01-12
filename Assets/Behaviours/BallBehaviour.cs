@@ -17,19 +17,6 @@ namespace Assets.Behaviours
             _levelController = new Lazy<LevelControllerBehaviour>(() => FindObjectOfType<LevelControllerBehaviour>());
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if(other.HasComponent<GoalZoneBehaviour>())
-            {
-                FindObjectOfType<LevelControllerBehaviour>().BallsInGoal++;
-                this.DestroyGameObject();
-            }
-            else if(other.HasComponent<KillZoneBehaviour>())
-            {
-                this.DestroyGameObject();
-            }
-        }
-
         private void Update()
         {
             if(transform.position.y < _levelController.Value.MinimumLevelGeometryY)
