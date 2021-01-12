@@ -4,5 +4,26 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Level_Pachinko.unity
+    guid: a70e361c20150d64da23b067ce96ffda
+  - enabled: 1
+    path: Assets/Scenes/Level_Spinner1.unity
+    guid: 013b93aff95eca543ba8a468b9df9dec
+  - enabled: 1
+    path: Assets/Scenes/Level_Spinner2.unity
+    guid: b3a9bd3e81da4c041a7442e4186504d9
+  - enabled: 1
+    path: Assets/Scenes/Level_Catapult.unity
+    guid: e00837cca482adb4d861d420625b940a
+  - enabled: 1
+    path: Assets/Scenes/Level_Turnstile.unity
+    guid: 679be9278f59bcc47a86652228064464
+  - enabled: 1
+    path: Assets/Scenes/Level_Gauntlet.unity
+    guid: 87ae9bb461a0cf24b865e5775522d3db
+  - enabled: 1
+    path: Assets/Scenes/Level_Seesaw.unity
+    guid: 0832105b6720de840961bb13c2f9493f
   m_configObjects: {}
