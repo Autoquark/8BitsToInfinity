@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BasicPipePink
+  m_Name: BasicPipeRed
   m_Shader: {fileID: -6465566751694194690, guid: 8042ea61d34e531459664a1ca50aff37,
     type: 3}
   m_ShaderKeywords: FRESNEL_ON
