@@ -152,7 +152,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8e658faa434388941beb65fd9d4f00d5, type: 2}
+  - {fileID: 2100000, guid: 6b830f62ba193704fb0849485cc1cfdd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -197,6 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 981280746921702167}
   - component: {fileID: 8066247316325511836}
+  - component: {fileID: 8588381135900940541}
   m_Layer: 0
   m_Name: STrough
   m_TagString: Untagged
@@ -242,6 +243,21 @@ MonoBehaviour:
   Base: {fileID: 1884712799444344801}
   LeftRim: {fileID: 8458935654566566922}
   RightRim: {fileID: 645055322971871738}
+--- !u!114 &8588381135900940541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6821049068131690759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5001d6fae7887e44b6ae8c22846d3a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scheme: 0
+  Invert: 0
+  Override: 0
 --- !u!1 &8458935654566566922
 GameObject:
   m_ObjectHideFlags: 0

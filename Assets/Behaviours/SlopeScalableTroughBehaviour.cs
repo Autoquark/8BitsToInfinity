@@ -33,9 +33,7 @@ namespace Assets.Behaviours.Editor
         [SerializeField]
         GameObject RightRim;
 
-        [SerializeField]
         static Lazy<Mesh> LowEdge = new Lazy<Mesh>(() => Resources.Load<Mesh>("LowEdge"));
-        [SerializeField]
         static Lazy<Mesh> HighEdge = new Lazy<Mesh>(() => Resources.Load<Mesh>("HighEdge"));
 
         static void SetUnitObjectBetweenPositions(Vector3 p1, Vector3 p2, Transform tr)
