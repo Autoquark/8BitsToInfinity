@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2167625461443949386}
+  - component: {fileID: 4194816865695738037}
   m_Layer: 0
   m_Name: LifterSegment
   m_TagString: Untagged
@@ -32,6 +33,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4194816865695738037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5876945411451568633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5001d6fae7887e44b6ae8c22846d3a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scheme: 6
+  Invert: 0
+  Override: 0
 --- !u!1001 &6569298254785406223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,6 +154,10 @@ PrefabInstance:
       propertyPath: SecondsForCompleteCycle
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1292174836, guid: 8c6da3a73e7400949a3ed9af5fff1c4c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fbc40d35deea456428265fb6ff5a0f34, type: 2}
     - target: {fileID: 1158082852362282167, guid: 8c6da3a73e7400949a3ed9af5fff1c4c,
         type: 3}
       propertyPath: m_RootOrder
@@ -193,6 +213,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1184621170869922723, guid: 8c6da3a73e7400949a3ed9af5fff1c4c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fbc40d35deea456428265fb6ff5a0f34, type: 2}
     - target: {fileID: 4838370582402399911, guid: 8c6da3a73e7400949a3ed9af5fff1c4c,
         type: 3}
       propertyPath: m_Name
