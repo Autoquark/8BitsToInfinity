@@ -12,7 +12,7 @@ namespace Assets.Editors
 {
     [CustomEditor(typeof(ScalableShallowChannelBehaviour))]
     [CanEditMultipleObjects]
-    class ScalableShallowChannelEditor : Editor
+    class ScalableChannelEditor : Editor
     {
         private IList<GameObject> _prefabs = new List<GameObject>();
         private Transform _lowest;
