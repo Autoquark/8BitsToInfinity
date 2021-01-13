@@ -513,6 +513,15 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!45 &4420203363322646252
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009712455872844761}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 9446f626248d5224fbb03395863806d5, type: 2}
 --- !u!1 &1633828802140389192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,6 +1597,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80a8bdba638f89f43bcf8be5d8390c54, type: 3}
+--- !u!1 &1009712455872844761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 216015040590751929, guid: 80a8bdba638f89f43bcf8be5d8390c54,
+    type: 3}
+  m_PrefabInstance: {fileID: 935702717317987168}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1009712455872844762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 216015040590751930, guid: 80a8bdba638f89f43bcf8be5d8390c54,
