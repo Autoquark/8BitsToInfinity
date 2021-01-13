@@ -14,37 +14,48 @@ namespace Assets.Editors
     [CanEditMultipleObjects]
     class ScalableShallowChannelEditor : Editor
     {
-        private GameObject _prefab;
+        private IList<GameObject> _prefabs = new List<GameObject>();
         private Transform _lowest;
         private Transform _highest;
         private MonoBehaviour Target => (MonoBehaviour)target;
-        private Vector3 _upOffset;
+        private int _selectedPrefabIndex = 0;
 
         private void OnEnable()
         {
-            _prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PipeShallowSlope.prefab");
+            _prefabs.Add(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PipeShallowSlope.prefab"));
+            _prefabs.Add(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PipeSloped.prefab"));
+            _prefabs.Add(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/PipeFlat.prefab"));
+
             _lowest = FindLowest();
             _highest = FindHighest();
-
-            _upOffset = new Vector3(0, 0.25f, -_prefab.GetComponent<MeshFilter>().sharedMesh.bounds.size.z);
+            if(_lowest != null)
+            {
+                _selectedPrefabIndex = _prefabs.IndexOf(PrefabUtility.GetCorrespondingObjectFromSource(_lowest.gameObject));
+            }
+            if(_selectedPrefabIndex == -1)
+            {
+                _selectedPrefabIndex = 0;
+            }
         }
 
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
+            _selectedPrefabIndex = EditorGUILayout.Popup(_selectedPrefabIndex, _prefabs.Select(x => x.name).ToArray());
+
             if (_lowest == null)
             {
                 if (GUILayout.Button("Add"))
                 {
-                    var next = (GameObject)PrefabUtility.InstantiatePrefab(_prefab, ((MonoBehaviour)target).transform);
+                    var next = (GameObject)PrefabUtility.InstantiatePrefab(_prefabs[_selectedPrefabIndex], ((MonoBehaviour)target).transform);
                     _highest = _lowest = next.transform;
                 }
             }
             else if(GUILayout.Button("Extend Up"))
             {
-                var next = (GameObject)PrefabUtility.InstantiatePrefab(_prefab, ((MonoBehaviour)target).transform);
-                next.transform.localPosition = _highest.localPosition + _upOffset;
+                var next = (GameObject)PrefabUtility.InstantiatePrefab(_prefabs[_selectedPrefabIndex], ((MonoBehaviour)target).transform);
+                next.transform.localPosition = _highest.localPosition + GetNextOffset(_prefabs[_selectedPrefabIndex]);
                 _highest = next.transform;
             }
             else if (GUILayout.Button("Reduce Up"))
@@ -54,8 +65,8 @@ namespace Assets.Editors
             }
             else if (GUILayout.Button("Extend Down"))
             {
-                var next = (GameObject)PrefabUtility.InstantiatePrefab(_prefab, ((MonoBehaviour)target).transform);
-                next.transform.localPosition = _lowest.localPosition - _upOffset;
+                var next = (GameObject)PrefabUtility.InstantiatePrefab(_prefabs[_selectedPrefabIndex], ((MonoBehaviour)target).transform);
+                next.transform.localPosition = _lowest.localPosition - GetNextOffset(_lowest.gameObject);
                 _lowest = next.transform;
             }
             else if (GUILayout.Button("Reduce Down"))
@@ -63,6 +74,12 @@ namespace Assets.Editors
                 DestroyImmediate(_lowest.gameObject);
                 _lowest = FindLowest();
             }
+        }
+
+        private Vector3 GetNextOffset(GameObject previous)
+        {
+            var size = previous.GetComponent<MeshFilter>().sharedMesh.bounds.size;
+            return new Vector3(0, size.y - 0.5f, -size.z);
         }
 
         private Transform FindHighest() => Target.transform.Children().MaxByOrDefault(x => x.transform.localPosition.y);
