@@ -123,7 +123,7 @@ namespace Assets.Behaviours.Editor
             {
                 var name = mr.gameObject.name;
 
-                if (name.EndsWith("rim", StringComparison.CurrentCultureIgnoreCase))
+                if (name.Contains("Trim") || name.Contains("Rim"))
                 {
                     mr.sharedMaterials = new[] { trim };
                 }
