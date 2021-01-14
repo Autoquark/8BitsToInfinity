@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 1149373707642638817}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.694
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitSound: {fileID: 8300000, guid: 7e08458660df7a540a9cb2217e5d03df, type: 3}
+  hitBallSound: {fileID: 8300000, guid: 2b8aa02ecda27584e93fd88c2aef1f5e, type: 3}
 --- !u!114 &1149373707642638817
 MonoBehaviour:
   m_ObjectHideFlags: 0
