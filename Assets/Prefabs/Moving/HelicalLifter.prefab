@@ -2113,6 +2113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Axis: 1
   SecondsForCompleteSpin: 30
+  Backwards: 0
 --- !u!1 &6993585877597885718
 GameObject:
   m_ObjectHideFlags: 0
