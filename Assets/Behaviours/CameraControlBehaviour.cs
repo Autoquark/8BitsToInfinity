@@ -35,12 +35,13 @@ namespace Assets.Behaviours
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            var bounds = FindObjectsOfType<CameraBoundBehaviour>();
-            _minY = bounds.Min(x => x.transform.position.y);
-            _maxY = bounds.Max(x => x.transform.position.y);
+            //var bounds = FindObjectsOfType<CameraBoundBehaviour>();
 
-            //transform.LookAt(new Vector3(0, (_minY + _maxY) / 2));
             var geometry = GameObject.Find("LevelGeometry").transform.Children().ToList();
+            _minY = geometry.Min(x => x.transform.position.y);
+            _maxY = geometry.Max(x => x.transform.position.y) + 5;
+
+            // Set pivot point to the centre of the bounding box of all level geometry
             _pivotPointXZ = new Vector3((geometry.Min(t => t.position.x) + geometry.Max(t => t.position.x)) / 2, 0, (geometry.Min(t => t.position.z) + geometry.Max(t => t.position.z)) / 2);
             transform.Rotate(0, Vector3.SignedAngle(transform.forward.WithY(0), _pivotPointXZ - transform.position.WithY(0), Vector3.up), 0, Space.World);
         }

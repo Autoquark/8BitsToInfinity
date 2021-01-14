@@ -25,6 +25,16 @@ namespace Assets.Behaviours.Switchables
         private float _moveSpeed;
         private float _rotateSpeed;
 
+        private void Reset()
+        {
+            var rigidbody = GetComponent<Rigidbody>();
+            if (rigidbody != null)
+            {
+                rigidbody.isKinematic = true;
+                rigidbody.useGravity = false;
+            }
+        }
+
         private void Awake()
         {
             _rotation.Normalize();
