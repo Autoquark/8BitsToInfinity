@@ -14,6 +14,7 @@ public class BallAudioSystem : MonoBehaviour
     float maxPitch = 1.0f;
     private bool airborne;
     public AudioClip hitSound;
+    public AudioClip hitBallSound;
     Coroutine leaveCheck;
     
 
@@ -27,9 +28,14 @@ public class BallAudioSystem : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            
+            AudioSource.PlayClipAtPoint(hitBallSound, collision.GetContact(0).point, percentBasedOnRelativeVelocityCalc(collision.relativeVelocity.sqrMagnitude, 0.5f));
+        }
         if (airborne)
         {
-            Debug.Log("Playing Hit");
+            //Debug.Log("Playing Hit");
             airborne = false;
             AudioSource.PlayClipAtPoint(hitSound, collision.GetContact(0).point, percentBasedOnVelocityCalc(0.5f));
             //audioSource.PlayOneShot(hitSound, percentBasedOnVelocityCalc());
@@ -69,10 +75,17 @@ public class BallAudioSystem : MonoBehaviour
         return rigidbodyVelocityMagnitude / maxSoundVelocityMagnitudeSqr;
     }
 
+    private float percentBasedOnRelativeVelocityCalc(float inMagnitude, float velocityMultiplier)
+    {
+        float rigidbodyVelocityMagnitude = inMagnitude * velocityMultiplier;
+        //Debug.Log("Velocity is" + rigidbodyVelocityMagnitude.ToString());
+        return rigidbodyVelocityMagnitude / maxSoundVelocityMagnitudeSqr;
+    }
+
     IEnumerator interruptableLeaveCheck()
     {
         yield return new WaitForSeconds(0.2f);
-        Debug.Log("Left the zone");
+        //Debug.Log("Left the zone");
         audioSource.volume = 0f;
         airborne = true;
     }
