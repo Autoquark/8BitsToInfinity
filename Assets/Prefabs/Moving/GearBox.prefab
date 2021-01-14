@@ -968,7 +968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Axis: 1
   SecondsForCompleteSpin: 4.5
-  Backwards: 0
+  Backwards: 1
 --- !u!1 &48057411789306343
 GameObject:
   m_ObjectHideFlags: 0
@@ -5360,7 +5360,7 @@ Transform:
   m_GameObject: {fileID: 48057413049600135}
   m_LocalRotation: {x: -0, y: -0, z: -0.61818033, w: 0.7860363}
   m_LocalPosition: {x: -2.56, y: 1.8, z: 0}
-  m_LocalScale: {x: 1, y: 2.5, z: 1}
+  m_LocalScale: {x: 1, y: 2.1, z: 1}
   m_Children: []
   m_Father: {fileID: 48057411493862497}
   m_RootOrder: 3

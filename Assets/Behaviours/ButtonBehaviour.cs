@@ -47,7 +47,7 @@ namespace Assets.Behaviours
                         _button.transform.localPosition, _button.transform.localPosition.WithY(_untriggeredY),
                         (Mathf.Abs(_triggeredY - _untriggeredY) * Time.fixedDeltaTime) / _resetTime));
 
-                if(_buttonRigidbody.transform.localPosition.y == _untriggeredY)
+                if(_buttonRigidbody.transform.localPosition.y >= _untriggeredY - 0.001f)
                 {
                     _buttonRigidbody.isKinematic = false;
                     _triggeredAt = -1;

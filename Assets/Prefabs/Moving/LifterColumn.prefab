@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Axis: 1
-  SecondsForCompleteCycle: 1.5
-  Dwell: 0.1
+  SecondsForCompleteCycle: 3
+  Dwell: 0.2
   DistanceTravelled: 1
   StartingPosition: 1
 --- !u!114 &494721988132230567
