@@ -22,6 +22,8 @@ namespace Assets.Behaviours.Moving
         RotationAxis Axis = RotationAxis.Y;
         [SerializeField]
         private float SecondsForCompleteSpin = 3.0f;
+        [SerializeField]
+        private bool Backwards = false;
 
         private float CurrentAngle = 0.0f;
         private Quaternion BaseRotation;
@@ -33,8 +35,14 @@ namespace Assets.Behaviours.Moving
 
         private void FixedUpdate()
         {
-            CurrentAngle += 360.0f / SecondsForCompleteSpin * Time.fixedDeltaTime;
-
+            if (!Backwards)
+            {
+                CurrentAngle += 360.0f / SecondsForCompleteSpin * Time.fixedDeltaTime;
+            }
+            else
+            {
+                CurrentAngle -= 360.0f / SecondsForCompleteSpin * Time.fixedDeltaTime;
+            }
             Quaternion rotation = Quaternion.Euler(
                 Axis == RotationAxis.X ? CurrentAngle : 0.0f,
                 Axis == RotationAxis.Y ? CurrentAngle : 0.0f,

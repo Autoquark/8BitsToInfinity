@@ -47,7 +47,7 @@ namespace Assets.Behaviours
             _previousScene = scene.name;
 
             MinimumLevelGeometryY = GameObject.Find("LevelGeometry").GetComponentsInChildren<Transform>()
-                .Min(x => x.position.y);
+                .Min(x => x.position.y - 10);
         }
 
         private void Update()
