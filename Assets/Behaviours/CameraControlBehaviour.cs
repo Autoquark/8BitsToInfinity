@@ -40,6 +40,9 @@ namespace Assets.Behaviours
         private float _rotate = 0;
         private float _pan = 0;
 
+        private static Vector3? _previousCameraPosition;
+        private static Quaternion? _previousCameraRotation;
+
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -49,11 +52,23 @@ namespace Assets.Behaviours
             _minY = geometry.Min(x => x.transform.position.y);
             _maxY = geometry.Max(x => x.transform.position.y) + 5;
 
+            if (_previousCameraPosition != null)
+            {
+                transform.position = _previousCameraPosition.Value;
+                _previousCameraPosition = null;
+            }
+
+            if (_previousCameraRotation != null)
+            {
+                transform.rotation = _previousCameraRotation.Value;
+                _previousCameraRotation = null;
+            }
+
             // Set pivot point to the centre of the bounding box of all level geometry
             _pivotPointXZ = new Vector3((geometry.Min(t => t.position.x) + geometry.Max(t => t.position.x)) / 2, 0, (geometry.Min(t => t.position.z) + geometry.Max(t => t.position.z)) / 2);
             transform.Rotate(0, Vector3.SignedAngle(transform.forward.WithY(0), _pivotPointXZ - transform.position.WithY(0), Vector3.up), 0, Space.World);
 
-            _distance = (_pivotPointXZ.WithY(0) - transform.position.WithY(0)).magnitude;
+            _distance = (_pivotPointXZ - transform.position.WithY(0)).magnitude;
             _pivot = transform.rotation.eulerAngles.y;
             _rotate = transform.rotation.eulerAngles.x;
             _pan = transform.position.y;
@@ -94,12 +109,12 @@ namespace Assets.Behaviours
                     yDelta -= _keyboardPanSensitivity;
                 }
 
-                _pan = Mathf.Clamp(_pan + yDelta * Time.deltaTime, _minY, _maxY);
+                _pan += yDelta * Time.deltaTime;
 
                 // 'zoom' - adjusts camera distance from pivot
                 zDelta = -Input.mouseScrollDelta.y;
 
-                _distance = Mathf.Clamp(_distance + zDelta, _minDistance, _maxDistance);
+                _distance += zDelta;
 
                 // Camera up/down rotation
                 elevationDelta = Input.GetMouseButton(1) ? Input.GetAxis("Mouse Y") * _mouseRotateSensitivity : 0;
@@ -113,12 +128,16 @@ namespace Assets.Behaviours
                 }
                 elevationDelta = _invertRotation ? -elevationDelta : elevationDelta;
 
-                _rotate = Mathf.Clamp(_rotate + elevationDelta * Time.deltaTime, _minXAngle, _maxXAngle);
+                _rotate += elevationDelta * Time.deltaTime;
             }
 
+            _distance = Mathf.Clamp(_distance, _minDistance, _maxDistance);
+            _pan = Mathf.Clamp(_pan, _minY, _maxY);
+            _rotate = Mathf.Clamp(_rotate, _minXAngle, _maxXAngle);
+
             transform.rotation = Quaternion.Euler(_rotate, _pivot, 0);
-            Vector3 posOnAxis = new Vector3(_pivotPointXZ.x, _pan, _pivotPointXZ.z);
-            transform.position = posOnAxis - transform.forward * _distance;
+            transform.position = _pivotPointXZ - transform.forward.WithY(0).normalized * _distance;
+            transform.position = transform.position.WithY(_pan);
         }
 
         public void SetAutomaticMode()
@@ -129,6 +148,12 @@ namespace Assets.Behaviours
         public void AnimateTo(MainMenuUiBehaviour.MenuPosition where)
         {
 
+        }
+
+        public void StorePosition()
+        {
+            _previousCameraPosition = transform.position;
+            _previousCameraRotation = transform.rotation;
         }
     }
 }

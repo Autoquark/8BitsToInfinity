@@ -10,10 +10,6 @@ namespace Assets.Behaviours
 {
     class LevelControllerBehaviour : MonoBehaviour
     {
-        private static Vector3 _previousCameraPosition;
-        private static Quaternion _previousCameraRotation;
-        private static string _previousScene;
-
         public int TotalBallsInGoalRequired = 1;
 
         public int BallsInGoal { get; set; } = 0;
@@ -29,23 +25,12 @@ namespace Assets.Behaviours
         public void RestartLevel()
         {
             var camera = FindObjectOfType<CameraControlBehaviour>();
-            _previousCameraPosition = camera.transform.position;
-            _previousCameraRotation = camera.transform.rotation;
+            camera.StorePosition();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         private void Start()
         {
-            var scene = SceneManager.GetActiveScene();
-            if (scene.name == _previousScene)
-            {
-                var camera = FindObjectOfType<CameraControlBehaviour>();
-                camera.transform.position = _previousCameraPosition;
-                camera.transform.rotation = _previousCameraRotation;
-            }
-
-            _previousScene = scene.name;
-
             MinimumLevelGeometryY = GameObject.Find("LevelGeometry").GetComponentsInChildren<Transform>()
                 .Min(x => x.position.y - 10);
         }
