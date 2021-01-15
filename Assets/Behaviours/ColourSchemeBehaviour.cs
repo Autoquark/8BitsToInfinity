@@ -18,7 +18,8 @@ namespace Assets.Behaviours.Editor
         BlueAndCyan,
         BlueAndGold,
         CyanAndBlack,
-        BlueAndWhite
+        BlueAndWhite,
+        Goal
     }
     class ColourSchemeBehaviour : MonoBehaviour
     {
@@ -36,7 +37,9 @@ namespace Assets.Behaviours.Editor
         static readonly Lazy<Material> Dark = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeDark"));
         static readonly Lazy<Material> Light = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeLight"));
         static readonly Lazy<Material> Orange = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeOrange"));
-        
+        static readonly Lazy<Material> GoalGreen = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeGoalGreen"));
+        static readonly Lazy<Material> GoalOrange = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeGoalOrange"));
+
         void GetMaterials(out Material main, out Material trim)
         {
             main = null;
@@ -79,6 +82,10 @@ namespace Assets.Behaviours.Editor
                 case ColourScheme.WhiteAndBlack:
                     main = Light.Value;
                     trim = Dark.Value;
+                    break;
+                case ColourScheme.Goal:
+                    main = GoalGreen.Value;
+                    trim = GoalOrange.Value;
                     break;
             }
 
