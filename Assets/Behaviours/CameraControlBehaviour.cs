@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Assets.Behaviours.Ui;
+using System.Collections;
 
 namespace Assets.Behaviours
 {
@@ -40,13 +41,16 @@ namespace Assets.Behaviours
         private float _rotate = 0;
         private float _pan = 0;
 
+        private Coroutine _animateToCoroutine;
+
+        private readonly float _transitionTime = 0.5f;
+
         private static Vector3? _previousCameraPosition;
         private static Quaternion? _previousCameraRotation;
 
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            //var bounds = FindObjectsOfType<CameraBoundBehaviour>();
 
             var geometry = GameObject.Find("LevelGeometry").transform.Children().ToList();
             _minY = geometry.Min(x => x.transform.position.y);
@@ -100,6 +104,10 @@ namespace Assets.Behaviours
 
                 // Up/down pan
                 yDelta = Input.GetMouseButton(0) ? Input.GetAxis("Mouse Y") * _mousePanSensitivity : 0;
+                if (Settings.InvertCameraPan)
+                {
+                    yDelta = -yDelta;
+                }
                 if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
                 {
                     yDelta += _keyboardPanSensitivity;
@@ -134,6 +142,7 @@ namespace Assets.Behaviours
             _distance = Mathf.Clamp(_distance, _minDistance, _maxDistance);
             _pan = Mathf.Clamp(_pan, _minY, _maxY);
             _rotate = Mathf.Clamp(_rotate, _minXAngle, _maxXAngle);
+            _pivot %= 360f;
 
             transform.rotation = Quaternion.Euler(_rotate, _pivot, 0);
             transform.position = _pivotPointXZ - transform.forward.WithY(0).normalized * _distance;
@@ -147,13 +156,43 @@ namespace Assets.Behaviours
 
         public void AnimateTo(MainMenuUiBehaviour.MenuPosition where)
         {
-
+            if (_animateToCoroutine != null)
+            {
+                StopCoroutine(_animateToCoroutine);
+            }
+            _animateToCoroutine = StartCoroutine(AnimateToCoroutine(where));
         }
 
         public void StorePosition()
         {
             _previousCameraPosition = transform.position;
             _previousCameraRotation = transform.rotation;
+        }
+
+        private IEnumerator AnimateToCoroutine(MainMenuUiBehaviour.MenuPosition where)
+        {
+            var difference = where.Pivot - _pivot;
+            var candidates = new[] { difference, difference + 360, difference - 360 };
+            var pivotRate = candidates.MinBy(Mathf.Abs) / _transitionTime;
+
+            var distanceRate = (where.Distance - _distance) / _transitionTime;
+            var rotateRate = (where.Rotate - _rotate) / _transitionTime;
+            var panRate = (where.Pan - _pan) / _transitionTime;
+            var finishTime = Time.time + _transitionTime;
+            
+            while(Time.time < finishTime)
+            {
+                _pivot += pivotRate * Time.deltaTime;
+                _distance += distanceRate * Time.deltaTime;
+                _pan += panRate * Time.deltaTime;
+                _rotate += rotateRate * Time.deltaTime;
+                yield return null;
+            }
+
+            _pivot = where.Pivot;
+            _distance = where.Distance;
+            _pan = where.Pan;
+            _rotate = where.Rotate;
         }
     }
 }

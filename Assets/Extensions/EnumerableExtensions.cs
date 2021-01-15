@@ -29,5 +29,7 @@ namespace Assets.Extensions
                     var bValue = selector(b);
                     return a.value < bValue ? a : (b, bValue);
                 }).element;
+
+        public static IEnumerable<T> Except<T>(this IEnumerable<T> sequence, T item) => sequence.Except(new[] { item });
     }
 }

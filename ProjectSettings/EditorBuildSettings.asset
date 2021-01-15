@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Level_Machine.unity
+    guid: 32e804e26dd274c4aab3493574a9e776
+  - enabled: 1
     path: Assets/Scenes/Level_Pachinko.unity
     guid: a70e361c20150d64da23b067ce96ffda
   - enabled: 1

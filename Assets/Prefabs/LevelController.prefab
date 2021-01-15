@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7851185754633678596}
   - component: {fileID: 888611007647933051}
   m_Layer: 0
-  m_Name: Controller
+  m_Name: LevelController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd98c04d9aa8d148b37dc87ac2625a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TotalBallsInGoalRequired: 1
+  LevelStartClip: {fileID: 8300000, guid: b69b5a869052c0747a2d7a5aadec3c2b, type: 3}
+  LevelRestartClip: {fileID: 8300000, guid: 91b343b4808922044a999e26ee317944, type: 3}
 --- !u!114 &888611007647933051
 MonoBehaviour:
   m_ObjectHideFlags: 0

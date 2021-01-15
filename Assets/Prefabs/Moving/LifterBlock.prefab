@@ -226,11 +226,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fbc40d35deea456428265fb6ff5a0f34, type: 2}
+    - target: {fileID: 5429735145148518060, guid: 259b25ffea1ee3049a2bfd085cdc2227,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fbc40d35deea456428265fb6ff5a0f34, type: 2}
     - target: {fileID: 5876945411451568633, guid: 259b25ffea1ee3049a2bfd085cdc2227,
         type: 3}
       propertyPath: m_Name
       value: LifterSegment
       objectReference: {fileID: 0}
+    - target: {fileID: 6569298255943229691, guid: 259b25ffea1ee3049a2bfd085cdc2227,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fbc40d35deea456428265fb6ff5a0f34, type: 2}
     - target: {fileID: 6569298256197131708, guid: 259b25ffea1ee3049a2bfd085cdc2227,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: SecondsForCompleteCycle
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1292174836, guid: 8c6da3a73e7400949a3ed9af5fff1c4c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fbc40d35deea456428265fb6ff5a0f34, type: 2}
     - target: {fileID: 1158082852362282167, guid: 8c6da3a73e7400949a3ed9af5fff1c4c,
         type: 3}
       propertyPath: m_RootOrder
@@ -122,6 +126,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1184621170869922723, guid: 8c6da3a73e7400949a3ed9af5fff1c4c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fbc40d35deea456428265fb6ff5a0f34, type: 2}
     - target: {fileID: 4838370582402399911, guid: 8c6da3a73e7400949a3ed9af5fff1c4c,
         type: 3}
       propertyPath: m_Name
