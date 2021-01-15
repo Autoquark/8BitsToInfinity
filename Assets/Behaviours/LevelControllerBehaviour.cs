@@ -10,8 +10,6 @@ namespace Assets.Behaviours
 {
     class LevelControllerBehaviour : MonoBehaviour
     {
-        public int TotalBallsInGoalRequired = 1;
-
         public int BallsInGoal { get; set; } = 0;
 
         public bool IsSwitched { get; private set; } = false;
