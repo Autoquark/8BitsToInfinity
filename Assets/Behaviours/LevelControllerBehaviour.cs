@@ -10,6 +10,9 @@ namespace Assets.Behaviours
 {
     class LevelControllerBehaviour : MonoBehaviour
     {
+        [SerializeField]
+        public bool MainMenuMode = false;
+
         public int BallsInGoal { get; set; } = 0;
 
         public bool IsSwitched { get; private set; } = false;
@@ -29,6 +32,8 @@ namespace Assets.Behaviours
         public GameObject CrossSceneAudioObject;
 
         private AudioSource audioSource;
+
+        bool _started = false;
 
         public void RestartLevel()
         {
@@ -58,10 +63,11 @@ namespace Assets.Behaviours
                 RestartLevel();
             }
 
-            if(Input.GetKeyDown(KeyCode.F))
+            if(!_started && (Input.GetKeyDown(KeyCode.F) || MainMenuMode))
             {
                 LevelStartTime = Time.time;
                 audioSource.PlayOneShot(LevelStartClip);
+                _started = true;
             }
         }
     }
