@@ -20,10 +20,20 @@ namespace Assets.Behaviours
 
         public float LevelStartTime { get; private set; } = -1;
 
+        public AudioClip LevelStartClip;
+
+        public AudioClip LevelRestartClip;
+
+        public GameObject CrossSceneAudioObject;
+
+        private AudioSource audioSource;
+
         public void RestartLevel()
         {
             var camera = FindObjectOfType<CameraControlBehaviour>();
             camera.StorePosition();
+            //GameObject liveAudio = Instantiate(CrossSceneAudioObject);
+            //liveAudio.GetComponent<CrossSceneAudio>().PlayAudio(LevelRestartClip);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
@@ -31,6 +41,7 @@ namespace Assets.Behaviours
         {
             MinimumLevelGeometryY = GameObject.Find("LevelGeometry").GetComponentsInChildren<Transform>()
                 .Min(x => x.position.y - 10);
+            audioSource = GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -48,6 +59,7 @@ namespace Assets.Behaviours
             if(Input.GetKeyDown(KeyCode.F))
             {
                 LevelStartTime = Time.time;
+                audioSource.PlayOneShot(LevelStartClip);
             }
         }
     }
