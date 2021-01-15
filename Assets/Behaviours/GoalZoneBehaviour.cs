@@ -41,6 +41,7 @@ namespace Assets.Behaviours
                 BallsInThisZone++;
                 _levelController.Value.BallsInGoal++;
                 other.DestroyGameObject();
+                GetComponent<AudioSource>().Play();
             }
         }
 
