@@ -24,6 +24,8 @@ namespace Assets.Behaviours
 
         public AudioClip LevelRestartClip;
 
+        public AudioClip LevelCompleteClip;
+
         public GameObject CrossSceneAudioObject;
 
         private AudioSource audioSource;

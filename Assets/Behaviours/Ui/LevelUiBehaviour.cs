@@ -62,6 +62,10 @@ namespace Assets.Behaviours.Ui
 
             if (_levelCompletedAt != -1 && Time.time - _levelCompletedAt > 1 && _inLevelUi.activeSelf)
             {
+                if (!_levelCompleteMenu.activeSelf)
+                {
+                    _levelController.GetComponent<AudioSource>().PlayOneShot(_levelController.LevelCompleteClip);
+                }
                 _inLevelUi.SetActive(false);
                 _levelCompleteMenu.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
