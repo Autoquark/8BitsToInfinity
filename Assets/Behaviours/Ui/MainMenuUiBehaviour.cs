@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,42 +15,57 @@ namespace Assets.Behaviours.Ui
         public class MenuPosition
         {
             [SerializeField]
-            Text Name;
+            public GameObject UiRoot;
             [SerializeField]
-            float Pivot;
+            public float Pivot;
             [SerializeField]
-            float Pan;
+            public float Pan;
             [SerializeField]
-            float Rotate;
+            public float Rotate;
             [SerializeField]
-            float Distance;
+            public float Distance;
         }
         [SerializeField]
-        private MenuPosition[] MenuPositions;
+        private MenuPosition[] _menuPositions;
 
-        private int CurrentMenu = 0;
-        Lazy<CameraControlBehaviour> CameraControl;
+        private int _currentMenu = 0;
+        Lazy<CameraControlBehaviour> _cameraControl;
 
         MainMenuUiBehaviour()
         {
-            CameraControl = new Lazy<CameraControlBehaviour>(FindObjectOfType<CameraControlBehaviour>);
+            _cameraControl = new Lazy<CameraControlBehaviour>(FindObjectOfType<CameraControlBehaviour>);
         }
 
         private void Start()
         {
-            var cc = CameraControl.Value;
-            if (cc != null)
-            {
-                cc.SetAutomaticMode();
-            }
+            _cameraControl.Value?.SetAutomaticMode();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            var cc = CameraControl.Value;
-            if (cc != null)
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                cc.AnimateTo(MenuPositions[CurrentMenu]);
+                _currentMenu--;
+                if (_currentMenu == -1)
+                {
+                    _currentMenu = _menuPositions.Length - 1;
+                }
+                _cameraControl.Value?.AnimateTo(_menuPositions[_currentMenu]);
+            }
+            else if(Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                _currentMenu++;
+                if(_currentMenu == _menuPositions.Length)
+                {
+                    _currentMenu = 0;
+                }
+                _cameraControl.Value?.AnimateTo(_menuPositions[_currentMenu]);
+            }
+
+            _menuPositions[_currentMenu].UiRoot.SetActive(true);
+            foreach(var menu in _menuPositions.Select(x => x.UiRoot).Except(_menuPositions[_currentMenu].UiRoot))
+            {
+                menu.SetActive(false);
             }
         }
     }
