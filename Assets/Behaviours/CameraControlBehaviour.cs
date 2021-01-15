@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Assets.Behaviours.Ui;
 
 namespace Assets.Behaviours
 {
@@ -32,6 +33,13 @@ namespace Assets.Behaviours
         // The point with y = 0 on the axis which the camera should pivot around
         private Vector3 _pivotPointXZ = Vector3.zero;
 
+        private bool _manualMode = true;
+
+        private float _distance = 0;
+        private float _pivot = 0;
+        private float _rotate = 0;
+        private float _pan = 0;
+
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -44,58 +52,83 @@ namespace Assets.Behaviours
             // Set pivot point to the centre of the bounding box of all level geometry
             _pivotPointXZ = new Vector3((geometry.Min(t => t.position.x) + geometry.Max(t => t.position.x)) / 2, 0, (geometry.Min(t => t.position.z) + geometry.Max(t => t.position.z)) / 2);
             transform.Rotate(0, Vector3.SignedAngle(transform.forward.WithY(0), _pivotPointXZ - transform.position.WithY(0), Vector3.up), 0, Space.World);
+
+            _distance = (_pivotPointXZ.WithY(0) - transform.position.WithY(0)).magnitude;
+            _pivot = transform.rotation.eulerAngles.y;
+            _rotate = transform.rotation.eulerAngles.x;
+            _pan = transform.position.y;
         }
 
         private void Update()
         {
-            Debug.DrawLine(_pivotPointXZ, _pivotPointXZ.WithY(10), Color.green);
+            float xDelta = 0;
+            float yDelta = 0;
+            float zDelta = 0;
+            float elevationDelta = 0;
 
-            // Left/right pivot around pivot point
-            var xDelta = Input.GetMouseButton(0) ? Input.GetAxis("Mouse X") * _mousePivotSensitivity : 0;
-            if(Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            if (_manualMode)
             {
-                xDelta -= _keyboardPivotSensitivity;
-            }
-            else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
-            {
-                xDelta += _keyboardPivotSensitivity;
-            }
-            transform.RotateAround(_pivotPointXZ, Vector3.up, xDelta * Time.deltaTime);
+                Debug.DrawLine(_pivotPointXZ, _pivotPointXZ.WithY(10), Color.green);
 
-            // Up/down pan
-            var yDelta = Input.GetMouseButton(0) ? Input.GetAxis("Mouse Y") * _mousePanSensitivity : 0;
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-            {
-                yDelta += _keyboardPanSensitivity;
-            }
-            else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-            {
-                yDelta -= _keyboardPanSensitivity;
-            }
-            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y + yDelta * Time.deltaTime, _minY, _maxY), transform.position.z);
+                // Left/right pivot around pivot point
+                xDelta = Input.GetMouseButton(0) ? Input.GetAxis("Mouse X") * _mousePivotSensitivity : 0;
+                if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+                {
+                    xDelta -= _keyboardPivotSensitivity;
+                }
+                else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+                {
+                    xDelta += _keyboardPivotSensitivity;
+                }
 
-            // 'zoom' - adjusts camera distance from pivot
-            var zDelta = -Input.mouseScrollDelta.y;
-            var currentDistance = Vector3.Distance(transform.position.WithY(0), _pivotPointXZ);
-            var distance = Mathf.Clamp(currentDistance + zDelta, _minDistance, _maxDistance);
-            var newPositionXZ = _pivotPointXZ + (transform.position.WithY(0) - _pivotPointXZ).normalized * distance;
-            transform.position = new Vector3(newPositionXZ.x, transform.position.y, newPositionXZ.z);
+                _pivot += xDelta * Time.deltaTime;
 
-            // Camera up/down rotation
-            yDelta = Input.GetMouseButton(1) ? Input.GetAxis("Mouse Y") * _mouseRotateSensitivity : 0;
-            if (Input.GetKey(KeyCode.E))
-            {
-                yDelta += _keyboardPanSensitivity;
+                // Up/down pan
+                yDelta = Input.GetMouseButton(0) ? Input.GetAxis("Mouse Y") * _mousePanSensitivity : 0;
+                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+                {
+                    yDelta += _keyboardPanSensitivity;
+                }
+                else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+                {
+                    yDelta -= _keyboardPanSensitivity;
+                }
+
+                _pan = Mathf.Clamp(_pan + yDelta * Time.deltaTime, _minY, _maxY);
+
+                // 'zoom' - adjusts camera distance from pivot
+                zDelta = -Input.mouseScrollDelta.y;
+
+                _distance = Mathf.Clamp(_distance + zDelta, _minDistance, _maxDistance);
+
+                // Camera up/down rotation
+                elevationDelta = Input.GetMouseButton(1) ? Input.GetAxis("Mouse Y") * _mouseRotateSensitivity : 0;
+                if (Input.GetKey(KeyCode.E))
+                {
+                    elevationDelta += _keyboardPanSensitivity;
+                }
+                else if (Input.GetKey(KeyCode.Q))
+                {
+                    elevationDelta -= _keyboardPanSensitivity;
+                }
+                elevationDelta = _invertRotation ? -elevationDelta : elevationDelta;
+
+                _rotate = Mathf.Clamp(_rotate + elevationDelta * Time.deltaTime, _minXAngle, _maxXAngle);
             }
-            else if (Input.GetKey(KeyCode.Q))
-            {
-                yDelta -= _keyboardPanSensitivity;
-            }
-            yDelta = _invertRotation ? -yDelta : yDelta;
-            transform.rotation = Quaternion.Euler(
-                Mathf.Clamp(transform.rotation.eulerAngles.x + yDelta * Time.deltaTime, _minXAngle, _maxXAngle),
-                transform.rotation.eulerAngles.y,
-                transform.rotation.eulerAngles.z);
+
+            transform.rotation = Quaternion.Euler(_rotate, _pivot, 0);
+            Vector3 posOnAxis = new Vector3(_pivotPointXZ.x, _pan, _pivotPointXZ.z);
+            transform.position = posOnAxis - transform.forward * _distance;
+        }
+
+        public void SetAutomaticMode()
+        {
+            _manualMode = false;
+        }
+
+        public void AnimateTo(MainMenuUiBehaviour.MenuPosition where)
+        {
+
         }
     }
 }
