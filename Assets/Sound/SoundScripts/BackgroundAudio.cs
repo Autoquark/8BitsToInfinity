@@ -8,10 +8,10 @@ public class BackgroundAudio : MonoBehaviour
 
     private void Awake()
     {
-        if (instance = null)
+        if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this.gameObject);
         } else
         {
             Destroy(this);
