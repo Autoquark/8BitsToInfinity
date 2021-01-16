@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Behaviours.Switchables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,8 +38,12 @@ namespace Assets.Behaviours.Editor
         static readonly Lazy<Material> Dark = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeDark"));
         static readonly Lazy<Material> Light = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeLight"));
         static readonly Lazy<Material> Orange = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeOrange"));
+
         static readonly Lazy<Material> GoalGreen = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeGoalGreen"));
         static readonly Lazy<Material> GoalOrange = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeGoalOrange"));
+
+        static readonly Lazy<Material> MovingRed = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeRedMoving"));
+        static readonly Lazy<Material> MovingOrange = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeOrangeMoving"));
 
         void GetMaterials(out Material main, out Material trim)
         {
@@ -118,6 +123,12 @@ namespace Assets.Behaviours.Editor
 
         private void RecurseChildren(Transform trans, Material main, Material trim)
         {
+            if (trans.gameObject.GetComponent<MoveOnSwitchBehaviour>())
+            {
+                main = MovingRed.Value;
+                trim = MovingOrange.Value;
+            }
+
             ColourSchemeBehaviour csb = trans.GetComponent<ColourSchemeBehaviour>();
 
             // if we're not looking at ourself and there is another scheme and it is set to override, nothing for us to do...
