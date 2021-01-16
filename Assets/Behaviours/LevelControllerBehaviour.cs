@@ -13,6 +13,9 @@ namespace Assets.Behaviours
         [SerializeField]
         public bool MainMenuMode = false;
 
+        [SerializeField]
+        public bool Enabled = true;
+
         public int BallsInGoal { get; set; } = 0;
 
         public bool IsSwitched { get; private set; } = false;
@@ -63,7 +66,7 @@ namespace Assets.Behaviours
                 RestartLevel();
             }
 
-            if(!_started && (Input.GetKeyDown(KeyCode.F) || MainMenuMode))
+            if(Enabled && !_started && (Input.GetKeyDown(KeyCode.F) || MainMenuMode))
             {
                 LevelStartTime = Time.time;
                 audioSource.PlayOneShot(LevelStartClip);
