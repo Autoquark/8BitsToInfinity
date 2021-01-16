@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,12 +30,12 @@ namespace Assets.Behaviours.Ui
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene(_firstLevelIndex + _selectedLevelNumber);
                 return;
             }
-            if(Input.GetKeyDown(KeyCode.UpArrow))
+            if(Input.GetKeyDown(KeyCode.DownArrow))
             {
                 _selectedLevelNumber++;
                 if(_selectedLevelNumber == _levelCount)
@@ -42,7 +43,7 @@ namespace Assets.Behaviours.Ui
                     _selectedLevelNumber = 0;
                 }
             }
-            if(Input.GetKeyDown(KeyCode.DownArrow))
+            if(Input.GetKeyDown(KeyCode.UpArrow))
             {
                 _selectedLevelNumber--;
                 if (_selectedLevelNumber == -1)
@@ -51,7 +52,8 @@ namespace Assets.Behaviours.Ui
                 }
             }
 
-            _selectedLevelText.text = "Level " + (_selectedLevelNumber + 1);
+            // SceneManager.GetSceneByBuildIndex returns an invalid scene if the scene has not been loaded, so we have to do this
+            _selectedLevelText.text = LevelNames.LevelNamesBySceneName[Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(_firstLevelIndex + _selectedLevelNumber))];
         }
     }
 }

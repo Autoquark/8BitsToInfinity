@@ -28,6 +28,8 @@ namespace Assets.Behaviours
         private GameObject _displayRoot;
         [SerializeField]
         private Text _displayText;
+        [SerializeField]
+        private GameObject audioObject;
 
         private void Start()
         {
@@ -41,7 +43,7 @@ namespace Assets.Behaviours
                 BallsInThisZone++;
                 _levelController.Value.BallsInGoal++;
                 other.DestroyGameObject();
-                GetComponent<AudioSource>().Play();
+                Instantiate(audioObject);
             }
         }
 

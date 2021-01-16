@@ -68,7 +68,7 @@ namespace Assets.Behaviours.Ui
             {
                 if (!_levelCompleteMenu.activeSelf)
                 {
-                    _levelController.GetComponent<AudioSource>().PlayOneShot(_levelController.LevelCompleteClip);
+                    Instantiate(_levelController.LevelCompleteAudio);
                 }
                 _inLevelUi.SetActive(false);
                 _levelCompleteMenu.SetActive(true);
@@ -81,5 +81,11 @@ namespace Assets.Behaviours.Ui
                 _pauseMenu.SetActive(!_pauseMenu.activeSelf);
             }
         }
+
+        public bool pauseMenuActive()
+        {
+            return _pauseMenu.activeSelf;
+        }
+
     }
 }

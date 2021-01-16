@@ -12,6 +12,7 @@ namespace Assets.Behaviours.Switchables
     {
         protected bool GoTowardsSwitchedPosition { get; set; } = false;
         protected bool IsAtSwitchedPosition { get; private set; } = false;
+        protected bool IsMoving { get; private set; } = false;
 
         [SerializeField]
         private Vector3 _movement;
@@ -19,11 +20,13 @@ namespace Assets.Behaviours.Switchables
         private Quaternion _rotation;
         [SerializeField]
         private float _switchingDuration = 0.5f;
+        
 
         private Vector3 _unswitchedPosition;
         private Quaternion _unswitchedRotation;
         private float _moveSpeed;
         private float _rotateSpeed;
+        
 
         private void Reset()
         {
@@ -43,6 +46,7 @@ namespace Assets.Behaviours.Switchables
             _unswitchedRotation = transform.rotation;
             _moveSpeed = (_movement.magnitude / _switchingDuration) * Time.fixedDeltaTime;
             _rotateSpeed = (Quaternion.Angle(_unswitchedRotation, _rotation * _unswitchedRotation) / _switchingDuration) * Time.fixedDeltaTime;
+            
         }
 
         protected virtual void FixedUpdate()
@@ -54,7 +58,19 @@ namespace Assets.Behaviours.Switchables
             GetComponent<Rigidbody>().MoveRotation(Quaternion.RotateTowards(transform.rotation, targetRotation, _rotateSpeed));
             GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(transform.position, targetPosition, _moveSpeed));
 
+            if (Vector3.Distance(transform.position, targetPosition) > 0.1f 
+                || Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+            {
+                IsMoving = true;
+            } else
+            {
+                IsMoving = false;
+            }
+
             IsAtSwitchedPosition = GoTowardsSwitchedPosition && transform.position == targetPosition && transform.rotation == targetRotation;
+
+            
+
         }
 
         private void OnDrawGizmos()

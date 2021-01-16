@@ -6,10 +6,10 @@ public class CrossSceneAudio : MonoBehaviour
 {
     public AudioSource audioSource;
 
-    public void PlayAudio(AudioClip audioClip)
+    private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        audioSource.PlayOneShot(audioClip);
+        audioSource.Play();
     }
 
     private void Update()
