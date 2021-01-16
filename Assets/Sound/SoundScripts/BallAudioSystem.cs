@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Assets.Behaviours.Ui;
+using System;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(Rigidbody))]
@@ -16,6 +19,7 @@ public class BallAudioSystem : MonoBehaviour
     public AudioClip hitSound;
     public AudioClip hitBallSound;
     Coroutine leaveCheck;
+    Lazy<LevelUiBehaviour> _ui; 
     
 
     private void Start()
@@ -24,6 +28,7 @@ public class BallAudioSystem : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
         audioSource.volume = 0;
         airborne = true;
+        _ui = new Lazy<LevelUiBehaviour>(FindObjectOfType<LevelUiBehaviour>);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -62,9 +67,16 @@ public class BallAudioSystem : MonoBehaviour
         {
             StopCoroutine(leaveCheck);
         }
-        float percentChange = percentBasedOnVelocityCalc(1f);
-        audioSource.volume = percentChange;
-        audioSource.pitch = minPitch + (percentChange * (maxPitch - minPitch));
+        if (_ui.Value.pauseMenuActive())
+        {
+            audioSource.volume = 0;
+        }
+        else
+        {
+            float percentChange = percentBasedOnVelocityCalc(1f);
+            audioSource.volume = percentChange;
+            audioSource.pitch = minPitch + (percentChange * (maxPitch - minPitch));
+        }
         
     }
 

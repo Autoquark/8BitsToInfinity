@@ -31,6 +31,7 @@ namespace Assets.Behaviours.Switchables
             _audioSource.clip = Resources.Load<AudioClip>("Audio/gearTurning");
             AudioMixer mixer = Resources.Load("Audio/MainMixer") as AudioMixer;
             _audioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("MovingParts")[0];
+            _audioSource.volume = 0;
             _audioSource.Play();
         }
 
