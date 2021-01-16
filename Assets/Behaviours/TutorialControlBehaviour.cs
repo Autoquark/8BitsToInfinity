@@ -28,7 +28,9 @@ namespace Assets.Behaviours
         [SerializeField]
         Step[] Steps;
 
-//        Lazy<PauseControlBehaviour> _pauseController = new Lazy<PauseControlBehaviour>(FindObjectOfType<PauseControlBehaviour>);
+        //        Lazy<PauseControlBehaviour> _pauseController = new Lazy<PauseControlBehaviour>(FindObjectOfType<PauseControlBehaviour>);
+        static readonly Lazy<Material> Attract = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeAttract"));
+        Dictionary<MeshRenderer, Material[]> ResetMaterials = new Dictionary<MeshRenderer, Material[]>();
 
         int _step = 0;
 
@@ -46,15 +48,26 @@ namespace Assets.Behaviours
 
         void StartPhase()
         {
-            Steps[_step].Root.SetActive(true);
-//            _pauseController.Value.Pause();
-            Steps[_step].Special.Invoke();
+            Step step = Steps[_step];
+            step.Root.SetActive(true);
+            //            _pauseController.Value.Pause();
+            step.Special.Invoke();
             Background.SetActive(true);
+
+            if (step.Subject)
+            {
+                SetAttractColours(step.Subject);
+            }
         }
 
         void EndPhase()
         {
-            Steps[_step].Root.SetActive(false);
+            Step step = Steps[_step];
+            if (step.Subject)
+            {
+                ResetColours(step.Subject);
+            }
+            step.Root.SetActive(false);
 //            _pauseController.Value.Unpause();
             _step++;
         }
@@ -74,6 +87,24 @@ namespace Assets.Behaviours
                 {
                     Background.SetActive(false);
                 }
+            }
+        }
+        private void SetAttractColours(GameObject subject)
+        {
+            ResetMaterials.Clear();
+
+            foreach(var mr in subject.GetComponentsInChildren<MeshRenderer>())
+            {
+                ResetMaterials[mr] = mr.materials;
+                mr.materials = new Material[] { Attract.Value };
+            }
+        }
+
+        private void ResetColours(GameObject subject)
+        {
+            foreach(var pair in ResetMaterials)
+            {
+                pair.Key.materials = pair.Value;
             }
         }
     }
