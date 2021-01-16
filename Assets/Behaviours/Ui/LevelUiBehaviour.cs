@@ -24,6 +24,8 @@ namespace Assets.Behaviours.Ui
         private GameObject _inLevelUi;
         [SerializeField]
         private GameObject _levelStartMessage;
+        [SerializeField]
+        private GameObject _pauseMenu;
 
         private Lazy<IList<GoalZoneBehaviour>> _goalZonesWithRequirement;
 
@@ -42,7 +44,7 @@ namespace Assets.Behaviours.Ui
 
         private void Update()
         {
-            _levelStartMessage.SetActive(!_levelController.LevelStarted);
+            _levelStartMessage.SetActive(!_levelController.LevelStarted && !_pauseMenu.activeSelf);
 
             var remaining = FindObjectsOfType<BallBehaviour>().Count() + FindObjectsOfType<BallGeneratorBehaviour>().Sum(x => x.RemainingBalls);
             _ballsRemainingText.text = $"Balls remaining: {remaining}";
@@ -65,6 +67,11 @@ namespace Assets.Behaviours.Ui
                 _inLevelUi.SetActive(false);
                 _levelCompleteMenu.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
+            }
+
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                _pauseMenu.SetActive(!_pauseMenu.activeSelf);
             }
         }
     }
