@@ -71,9 +71,10 @@ namespace Assets.Behaviours.Ui
                 _inLevelUi.SetActive(false);
                 _levelCompleteMenu.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
 
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if(Input.GetKeyDown(KeyCode.M))
             {
                 _pauseMenu.SetActive(!_pauseMenu.activeSelf);
             }
