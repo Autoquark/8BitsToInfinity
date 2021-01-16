@@ -57,7 +57,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_B363D819: 1
     - FRESNEL: 1
+    - Vector1_940BB122: 0.5
+    - Vector1_EA3D02FC: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
