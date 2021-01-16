@@ -17,6 +17,7 @@ namespace Assets.Behaviours.Ui
         private Button _mainMenuButton;
 
         private CursorLockMode _previousLockMode;
+        private bool _previousCursorVisible;
 
         private void Start()
         {
@@ -28,13 +29,16 @@ namespace Assets.Behaviours.Ui
         private void OnEnable()
         {
             _previousLockMode = Cursor.lockState;
+            _previousCursorVisible = Cursor.visible;
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             FindObjectOfType<PauseControlBehaviour>().Pause();
         }
 
         private void OnDisable()
         {
             Cursor.lockState = _previousLockMode;
+            Cursor.visible = _previousCursorVisible;
             FindObjectOfType<PauseControlBehaviour>().Unpause();
         }
     }

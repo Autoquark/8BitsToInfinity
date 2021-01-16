@@ -51,6 +51,7 @@ namespace Assets.Behaviours
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
             var geometry = GameObject.Find("LevelGeometry").transform.Children().ToList();
             _minY = geometry.Min(x => x.transform.position.y);
