@@ -74,7 +74,7 @@ namespace Assets.Behaviours.Ui
                 Cursor.visible = true;
             }
 
-            if(Input.GetKeyDown(KeyCode.M))
+            if(Input.GetKeyDown(KeyCode.Escape) && _levelCompletedAt == -1)
             {
                 _pauseMenu.SetActive(!_pauseMenu.activeSelf);
             }
