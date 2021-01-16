@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Extensions
 {
-    static class TransformExtensions
+    public static class TransformExtensions
     {
         public static IEnumerable<Transform> Children(this Transform transform) => transform.Cast<Transform>();
     }

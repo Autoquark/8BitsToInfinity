@@ -17,11 +17,14 @@ namespace Assets.Behaviours.Ui
         private Button _restartLevelButton;
         [SerializeField]
         private Button _nextLevelButton;
+        [SerializeField]
+        private Button _mainMenuButton;
 
         private void Start()
         {
             _restartLevelButton.onClick.AddListener(() => _levelController.RestartLevel());
             _nextLevelButton.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
+            _mainMenuButton.onClick.AddListener(() => SceneManager.LoadScene("Level_Machine"));
         }
     }
 }

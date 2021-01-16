@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Behaviours
 {
-    class ScalableShallowChannelBehaviour : MonoBehaviour
+    public class ScalableShallowChannelBehaviour : MonoBehaviour
     {
     }
 }
