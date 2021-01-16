@@ -171,7 +171,10 @@ MonoBehaviour:
     Ball hit sounds adapted from: <a href="https://freesound.org/people/bsumusictech/sounds/62331/">"Pool
     balls.wav"</a> by bsumusictech
 
+    Gear sounds adapted from: <a href="https://freesound.org/people/Vurca/sounds/315753/">"Running
+    Gear"</a> by Vurca
 
+    
 
     Art
 
@@ -184,7 +187,8 @@ MonoBehaviour:
     <a href="https://github.com/merpheus-dev/BlackHoleShader">Black
     Hole Shader</a> by Mert Kirimgeri
 
-'
+    <a href="http://clipart-library.com/clipart/lever-cliparts_15.htm">"level
+    clipart"</a> from clipart-library.com'
 --- !u!114 &625820428
 MonoBehaviour:
   m_ObjectHideFlags: 0

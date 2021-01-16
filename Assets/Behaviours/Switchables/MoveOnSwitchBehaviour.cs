@@ -40,9 +40,10 @@ namespace Assets.Behaviours.Switchables
         {
             GoTowardsSwitchedPosition = _controller.Value.IsSwitched;
             
-            if (IsMoving && !_ui.Value.pauseMenuActive())
+            if (IsMoving)
             {
                 _audioSource.volume = 1f;
+                
             } else
             {
                 _audioSource.volume = 0f;

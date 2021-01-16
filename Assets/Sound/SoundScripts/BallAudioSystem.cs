@@ -19,7 +19,7 @@ public class BallAudioSystem : MonoBehaviour
     public AudioClip hitSound;
     public AudioClip hitBallSound;
     Coroutine leaveCheck;
-    Lazy<LevelUiBehaviour> _ui; 
+    private readonly Lazy<LevelUiBehaviour> _ui; 
     
 
     private void Start()
@@ -28,6 +28,11 @@ public class BallAudioSystem : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
         audioSource.volume = 0;
         airborne = true;
+        
+    }
+
+    public BallAudioSystem()
+    {
         _ui = new Lazy<LevelUiBehaviour>(FindObjectOfType<LevelUiBehaviour>);
     }
 
@@ -67,17 +72,24 @@ public class BallAudioSystem : MonoBehaviour
         {
             StopCoroutine(leaveCheck);
         }
-        if (_ui.Value.pauseMenuActive())
-        {
-            audioSource.volume = 0;
-        }
-        else
-        {
-            float percentChange = percentBasedOnVelocityCalc(1f);
-            audioSource.volume = percentChange;
-            audioSource.pitch = minPitch + (percentChange * (maxPitch - minPitch));
-        }
+
+        float percentChange = percentBasedOnVelocityCalc(1f);
+        audioSource.volume = percentChange;
+        audioSource.pitch = minPitch + (percentChange * (maxPitch - minPitch));
+
         
+        
+    }
+
+    private void Update()
+    {
+        if (_ui.Value != null)
+        {
+            if (_ui.Value.pauseMenuActive())
+            {
+                audioSource.volume = 0;
+            }
+        }
     }
 
     private float percentBasedOnVelocityCalc(float velocityMultiplier)
