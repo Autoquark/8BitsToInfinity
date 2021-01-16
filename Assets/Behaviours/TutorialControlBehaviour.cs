@@ -1,4 +1,5 @@
-﻿using Assets.Extensions;
+﻿using Assets.Behaviours.Ui;
+using Assets.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,12 +32,17 @@ namespace Assets.Behaviours
         //        Lazy<PauseControlBehaviour> _pauseController = new Lazy<PauseControlBehaviour>(FindObjectOfType<PauseControlBehaviour>);
         static readonly Lazy<Material> Attract = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeAttract"));
         Dictionary<MeshRenderer, Material[]> ResetMaterials = new Dictionary<MeshRenderer, Material[]>();
+        static readonly Lazy<LevelControllerBehaviour> LevelController = new Lazy<LevelControllerBehaviour>(FindObjectOfType<LevelControllerBehaviour>);
+        static readonly Lazy<LevelUiBehaviour> LevelUiController = new Lazy<LevelUiBehaviour>(FindObjectOfType<LevelUiBehaviour>);
 
         int _step = 0;
 
         private void Start()
         {
-            foreach(var step in Steps)
+            LevelController.Value.Enabled = false;
+            LevelUiController.Value.InTutorial = true;
+
+            foreach (var step in Steps)
             {
                 step.Root.SetActive(false);
             }
@@ -86,6 +92,8 @@ namespace Assets.Behaviours
                 else
                 {
                     Background.SetActive(false);
+                    LevelController.Value.Enabled = true;
+                    LevelUiController.Value.InTutorial = false;
                 }
             }
         }
