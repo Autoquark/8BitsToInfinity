@@ -16,11 +16,26 @@ namespace Assets.Behaviours.Ui
         [SerializeField]
         private Button _mainMenuButton;
 
+        private CursorLockMode _previousLockMode;
+
         private void Start()
         {
             var levelController = FindObjectOfType<LevelControllerBehaviour>();
             _restartLevelButton.onClick.AddListener(() => levelController.RestartLevel());
             _mainMenuButton.onClick.AddListener(() => SceneManager.LoadScene("Level_Machine"));
+        }
+
+        private void OnEnable()
+        {
+            _previousLockMode = Cursor.lockState;
+            Cursor.lockState = CursorLockMode.None;
+            FindObjectOfType<PauseControlBehaviour>().Pause();
+        }
+
+        private void OnDisable()
+        {
+            Cursor.lockState = _previousLockMode;
+            FindObjectOfType<PauseControlBehaviour>().Unpause();
         }
     }
 }
