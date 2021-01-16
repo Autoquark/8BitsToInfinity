@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1033,7 +1033,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-217250
+  m_Name: pb_Mesh-39604
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1201,7 +1201,6 @@ GameObject:
   - component: {fileID: 171190252}
   - component: {fileID: 171190251}
   - component: {fileID: 171190250}
-  - component: {fileID: 171190249}
   m_Layer: 0
   m_Name: Credits
   m_TagString: Untagged
@@ -1209,19 +1208,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &171190249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171190248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da0512f2156d58419c7978317158ce5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cameraInvertValueText: {fileID: 0}
 --- !u!114 &171190250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4430,7 +4416,7 @@ MonoBehaviour:
     Ball hit sounds adapted from: <a href="https://freesound.org/people/bsumusictech/sounds/62331/">"Pool
     balls.wav"</a> by bsumusictech
 
-    
+
 
     Art
 
@@ -5651,7 +5637,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-217260
+  m_Name: pb_Mesh-39614
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12960,7 +12946,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-217268
+  m_Name: pb_Mesh-39622
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13363,7 +13349,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-217258
+  m_Name: pb_Mesh-39612
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16666,7 +16652,7 @@ PrefabInstance:
     - target: {fileID: 5420227024806838712, guid: 259b25ffea1ee3049a2bfd085cdc2227,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.0027007
+      value: -1.0028199
       objectReference: {fileID: 0}
     - target: {fileID: 5420227024806838712, guid: 259b25ffea1ee3049a2bfd085cdc2227,
         type: 3}
@@ -17040,7 +17026,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-217248
+  m_Name: pb_Mesh-39602
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -25618,12 +25604,12 @@ PrefabInstance:
     - target: {fileID: 7868292367699247079, guid: e0d763a53b7e5134fbc54bdc39fc6469,
         type: 3}
       propertyPath: m_Pivot.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7868292367699247079, guid: e0d763a53b7e5134fbc54bdc39fc6469,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7868292367699247079, guid: e0d763a53b7e5134fbc54bdc39fc6469,
         type: 3}
@@ -25638,42 +25624,42 @@ PrefabInstance:
     - target: {fileID: 7868292367699247079, guid: e0d763a53b7e5134fbc54bdc39fc6469,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7868292367699247079, guid: e0d763a53b7e5134fbc54bdc39fc6469,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7868292367699247079, guid: e0d763a53b7e5134fbc54bdc39fc6469,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7868292367699247079, guid: e0d763a53b7e5134fbc54bdc39fc6469,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7868292367699247079, guid: e0d763a53b7e5134fbc54bdc39fc6469,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7868292367699247079, guid: e0d763a53b7e5134fbc54bdc39fc6469,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7868292367699247079, guid: e0d763a53b7e5134fbc54bdc39fc6469,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 563.5
       objectReference: {fileID: 0}
     - target: {fileID: 7868292367699247079, guid: e0d763a53b7e5134fbc54bdc39fc6469,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 317
       objectReference: {fileID: 0}
     - target: {fileID: 7868292367733259682, guid: e0d763a53b7e5134fbc54bdc39fc6469,
         type: 3}
