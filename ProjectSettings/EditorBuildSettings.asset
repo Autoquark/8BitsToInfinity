@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level_Spinner1.unity
     guid: 013b93aff95eca543ba8a468b9df9dec
   - enabled: 1
+    path: Assets/Scenes/Level_ThreeWay.unity
+    guid: d168e32ee186dc0419b7f533004d8d37
+  - enabled: 1
     path: Assets/Scenes/Level_Spinner2.unity
     guid: b3a9bd3e81da4c041a7442e4186504d9
   - enabled: 1

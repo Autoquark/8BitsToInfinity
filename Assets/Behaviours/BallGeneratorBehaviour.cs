@@ -18,9 +18,9 @@ public class BallGeneratorBehaviour : MonoBehaviour
     [SerializeField]
     private GameObject _displayRoot;
     [SerializeField]
-    private Text _displayTextTimeRemaining;
-    [SerializeField]
     private Text _displayTextBallsRemaining;
+    [SerializeField]
+    private Image _timeRemainingProgressCircle;
 
     private float _lastSpawnTime = -999;
     private Lazy<LevelControllerBehaviour> _levelController;
@@ -64,18 +64,12 @@ public class BallGeneratorBehaviour : MonoBehaviour
     {
         _displayRoot.transform.forward = _camera.Value.transform.forward;
         float spawnTimeRemaining = 0f;
+        float maxSpawnTimeRemaining = 0f;
 
         //if the level has not yet started
         if (!_levelController.Value.LevelStarted)
         {
-            if (_delay > 0)
-            {
-                spawnTimeRemaining = _delay;
-            } else
-            {
-                spawnTimeRemaining = _interval;
-            }
-            
+            maxSpawnTimeRemaining = spawnTimeRemaining = _delay > 0 ? _delay : _interval;
         }
         //if the level has started
         else
@@ -85,23 +79,27 @@ public class BallGeneratorBehaviour : MonoBehaviour
                 //if we have not spawned the first ball yet
                 if (Time.time < _levelController.Value.LevelStartTime + _delay)
                 {
+                    maxSpawnTimeRemaining = _delay;
                     spawnTimeRemaining = _delay - (Time.time - _levelController.Value.LevelStartTime);
                 }
                 //after the first ball has spawned
                 else
                 {
+                    maxSpawnTimeRemaining = _interval;
                     spawnTimeRemaining = _interval - (Time.fixedTime - _lastSpawnTime);
                 }
             }
             //if there is no delay in the level
             else
             {
+                maxSpawnTimeRemaining = _interval;
                 spawnTimeRemaining = _interval - (Time.fixedTime - _lastSpawnTime);
             }
             
         }
-        
-        _displayTextTimeRemaining.text = $"Time: {spawnTimeRemaining.ToString("F2")}";
-        _displayTextBallsRemaining.text = $"Balls: {_spawnCount}";
+
+        //_displayTextTimeRemaining.text = $"Time: {spawnTimeRemaining.ToString("F2")}";
+        _timeRemainingProgressCircle.fillAmount = spawnTimeRemaining / maxSpawnTimeRemaining;
+        _displayTextBallsRemaining.text = _spawnCount.ToString();
     }
 }
