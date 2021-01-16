@@ -50,7 +50,7 @@ namespace Assets.Behaviours.Ui
                 SceneManager.LoadScene(_firstLevelIndex + _selectedLevelNumber);
                 return;
             }
-            if(Input.GetKeyDown(KeyCode.UpArrow))
+            if(Input.GetKeyDown(KeyCode.DownArrow))
             {
                 _selectedLevelNumber++;
                 if(_selectedLevelNumber == _levelCount)
@@ -58,7 +58,7 @@ namespace Assets.Behaviours.Ui
                     _selectedLevelNumber = 0;
                 }
             }
-            if(Input.GetKeyDown(KeyCode.DownArrow))
+            if(Input.GetKeyDown(KeyCode.UpArrow))
             {
                 _selectedLevelNumber--;
                 if (_selectedLevelNumber == -1)
