@@ -53,9 +53,14 @@ namespace Assets.Behaviours
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            var geometry = GameObject.Find("LevelGeometry").transform.Children().ToList();
-            _minY = geometry.Min(x => x.transform.position.y);
-            _maxY = geometry.Max(x => x.transform.position.y) + 5;
+            var geometry = GameObject.Find("LevelGeometry");
+            var bounds = new Bounds();
+            foreach(var mesh in geometry.GetComponentsInChildren<MeshRenderer>())
+            {
+                bounds.Encapsulate(mesh.bounds);
+            }
+            _minY = bounds.min.y;
+            _maxY = bounds.max.y + 5;
 
             if (_previousCameraPosition != null)
             {
@@ -70,7 +75,7 @@ namespace Assets.Behaviours
             }
 
             // Set pivot point to the centre of the bounding box of all level geometry
-            _pivotPointXZ = new Vector3((geometry.Min(t => t.position.x) + geometry.Max(t => t.position.x)) / 2, 0, (geometry.Min(t => t.position.z) + geometry.Max(t => t.position.z)) / 2);
+            _pivotPointXZ = bounds.center.WithY(0);
             transform.Rotate(0, Vector3.SignedAngle(transform.forward.WithY(0), _pivotPointXZ - transform.position.WithY(0), Vector3.up), 0, Space.World);
 
             _distance = (_pivotPointXZ - transform.position.WithY(0)).magnitude;
