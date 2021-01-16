@@ -3735,6 +3735,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6920145252885972190, guid: b4076e81183b57f4f92a7eed8cf967f6,
         type: 3}
+      propertyPath: LevelStartAudio
+      value: 
+      objectReference: {fileID: 4499875028628920776, guid: 455c24f49aeabf244a94a30c5db76452,
+        type: 3}
+    - target: {fileID: 6920145252885972190, guid: b4076e81183b57f4f92a7eed8cf967f6,
+        type: 3}
+      propertyPath: LevelCompleteAudio
+      value: 
+      objectReference: {fileID: 1197775063800215005, guid: 953fbcee530abaf4d8ce20e756c47f7f,
+        type: 3}
+    - target: {fileID: 6920145252885972190, guid: b4076e81183b57f4f92a7eed8cf967f6,
+        type: 3}
       propertyPath: BallsInGoalRequired
       value: 3
       objectReference: {fileID: 0}
@@ -3773,5 +3785,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 437591686600197974, guid: b4076e81183b57f4f92a7eed8cf967f6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b4076e81183b57f4f92a7eed8cf967f6, type: 3}

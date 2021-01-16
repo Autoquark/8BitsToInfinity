@@ -75,7 +75,7 @@ namespace Assets.Behaviours
             }
             step.Root.SetActive(false);
 //            _pauseController.Value.Unpause();
-            _step++;
+            if (_step < Steps.Length) _step++;
         }
 
         private void Update()

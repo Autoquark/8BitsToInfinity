@@ -44,10 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd98c04d9aa8d148b37dc87ac2625a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelStartClip: {fileID: 8300000, guid: b69b5a869052c0747a2d7a5aadec3c2b, type: 3}
-  LevelRestartClip: {fileID: 8300000, guid: 91b343b4808922044a999e26ee317944, type: 3}
-  LevelCompleteClip: {fileID: 8300000, guid: 8e3fd23957bd78a4caf8d15b39dada61, type: 3}
-  CrossSceneAudioObject: {fileID: 1006994733159899107, guid: a53c7fe66358b334ca9afe983644d9f5,
+  MainMenuMode: 0
+  Enabled: 1
+  LevelStartAudio: {fileID: 4499875028628920776, guid: 455c24f49aeabf244a94a30c5db76452,
+    type: 3}
+  LevelCompleteAudio: {fileID: 1197775063800215005, guid: 953fbcee530abaf4d8ce20e756c47f7f,
     type: 3}
 --- !u!114 &888611007647933051
 MonoBehaviour:

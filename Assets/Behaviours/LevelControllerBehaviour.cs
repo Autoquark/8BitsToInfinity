@@ -26,15 +26,10 @@ namespace Assets.Behaviours
 
         public float LevelStartTime { get; private set; } = -1;
 
-        public AudioClip LevelStartClip;
+        [SerializeField]
+        private GameObject LevelStartAudio;
 
-        public AudioClip LevelRestartClip;
-
-        public AudioClip LevelCompleteClip;
-
-        public GameObject CrossSceneAudioObject;
-
-        private AudioSource audioSource;
+        public GameObject LevelCompleteAudio;
 
         bool _started = false;
 
@@ -42,8 +37,6 @@ namespace Assets.Behaviours
         {
             var camera = FindObjectOfType<CameraControlBehaviour>();
             camera.StorePosition();
-            //GameObject liveAudio = Instantiate(CrossSceneAudioObject);
-            //liveAudio.GetComponent<CrossSceneAudio>().PlayAudio(LevelRestartClip);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
@@ -51,7 +44,6 @@ namespace Assets.Behaviours
         {
             MinimumLevelGeometryY = GameObject.Find("LevelGeometry").GetComponentsInChildren<Transform>()
                 .Min(x => x.position.y - 10);
-            audioSource = GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -69,7 +61,7 @@ namespace Assets.Behaviours
             if(Enabled && !_started && (Input.GetKeyDown(KeyCode.F) || MainMenuMode))
             {
                 LevelStartTime = Time.time;
-                audioSource.PlayOneShot(LevelStartClip);
+                if (!MainMenuMode) Instantiate(LevelStartAudio);
                 _started = true;
             }
         }

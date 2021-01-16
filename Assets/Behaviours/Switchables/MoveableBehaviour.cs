@@ -58,8 +58,8 @@ namespace Assets.Behaviours.Switchables
             GetComponent<Rigidbody>().MoveRotation(Quaternion.RotateTowards(transform.rotation, targetRotation, _rotateSpeed));
             GetComponent<Rigidbody>().MovePosition(Vector3.MoveTowards(transform.position, targetPosition, _moveSpeed));
 
-            if (Vector3.Distance(transform.position, targetPosition) > 0.01f 
-                || Quaternion.Angle(transform.rotation, targetRotation) > 0.01f)
+            if (Vector3.Distance(transform.position, targetPosition) > 0.1f 
+                || Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
             {
                 IsMoving = true;
             } else

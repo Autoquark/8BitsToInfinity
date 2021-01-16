@@ -5,15 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Audio;
+using Assets.Behaviours.Ui;
 
 
-    
+
 namespace Assets.Behaviours.Switchables
 {
-    [RequireComponent(typeof(AudioSource))]
+    
     class MoveOnSwitchBehaviour : MoveableBehaviour
     {
         private readonly Lazy<LevelControllerBehaviour> _controller;
+        private readonly Lazy<LevelUiBehaviour> _ui;
         private AudioSource _audioSource;
 
         public MoveOnSwitchBehaviour()
@@ -26,6 +29,8 @@ namespace Assets.Behaviours.Switchables
             _audioSource = gameObject.AddComponent<AudioSource>();
             _audioSource.loop = true;
             _audioSource.clip = Resources.Load<AudioClip>("Audio/gearTurning");
+            AudioMixer mixer = Resources.Load("Audio/MainMixer") as AudioMixer;
+            _audioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("MovingParts")[0];
             _audioSource.Play();
         }
 
@@ -33,7 +38,7 @@ namespace Assets.Behaviours.Switchables
         {
             GoTowardsSwitchedPosition = _controller.Value.IsSwitched;
             
-            if (IsMoving)
+            if (IsMoving && !_ui.Value.pauseMenuActive())
             {
                 _audioSource.volume = 1f;
             } else

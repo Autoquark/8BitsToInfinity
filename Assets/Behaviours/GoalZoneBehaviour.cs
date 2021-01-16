@@ -28,13 +28,12 @@ namespace Assets.Behaviours
         private GameObject _displayRoot;
         [SerializeField]
         private Text _displayText;
-
-        private AudioSource _audioSource;
+        [SerializeField]
+        private GameObject audioObject;
 
         private void Start()
         {
             _displayRoot.SetActive(RequiredInThisZone > 0);
-            _audioSource = GetComponent<AudioSource>();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -44,7 +43,7 @@ namespace Assets.Behaviours
                 BallsInThisZone++;
                 _levelController.Value.BallsInGoal++;
                 other.DestroyGameObject();
-                _audioSource.PlayOneShot(_audioSource.clip);
+                Instantiate(audioObject);
             }
         }
 
