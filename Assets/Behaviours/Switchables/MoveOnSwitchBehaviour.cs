@@ -22,6 +22,7 @@ namespace Assets.Behaviours.Switchables
         public MoveOnSwitchBehaviour()
         {
             _controller = new Lazy<LevelControllerBehaviour>(FindObjectOfType<LevelControllerBehaviour>);
+            _ui = new Lazy<LevelUiBehaviour>(FindObjectOfType<LevelUiBehaviour>);
         }
 
         private void Start()
