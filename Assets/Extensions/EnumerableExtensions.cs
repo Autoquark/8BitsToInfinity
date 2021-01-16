@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Extensions
 {
-    static class EnumerableExtensions
+    public static class EnumerableExtensions
     {
         public static T MaxByOrDefault<T>(this IEnumerable<T> sequence, Func<T, float> selector, T defaultValue = default)
             => sequence.Any() ? sequence.MaxBy(selector) : defaultValue;
