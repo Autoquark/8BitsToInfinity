@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,21 @@ namespace Assets.Behaviours.Ui
         private int _lastLevelIndex = -1;
         private int _levelCount => _lastLevelIndex - _firstLevelIndex;
 
+        private IDictionary<string, string> _sceneNameToLevelName = new Dictionary<string, string>
+        {
+            { "Level_Catapult", "Catapult" },
+            { "Level_Gauntlet", "Gauntlet" },
+            { "Level_Pachinko", "Pachinko" },
+            { "Level_Seesaw", "Seesaw" },
+            { "Level_Spinner1", "Spin to Win" },
+            { "Level_Spinner2", "Spinstack" },
+            { "Level_ThreeWay", "2 out of 3 Ain't Enough" },
+            { "Level_Turnstile", "Turnstile" },
+            { "Level_TurnTheRightWay", "Turn the Right Way" },
+            { "Level_TurnTurnTurn", "Turn Turn Turn!" },
+            { "Level_Tutorial", "Tutorial" },
+        };
+
         private void Start()
         {
             if(_lastLevelIndex == -1)
@@ -29,7 +45,7 @@ namespace Assets.Behaviours.Ui
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene(_firstLevelIndex + _selectedLevelNumber);
                 return;
@@ -51,7 +67,8 @@ namespace Assets.Behaviours.Ui
                 }
             }
 
-            _selectedLevelText.text = "Level " + (_selectedLevelNumber + 1);
+            // SceneManager.GetSceneByBuildIndex returns an invalid scene if the scene has not been loaded, so we have to do this
+            _selectedLevelText.text = _sceneNameToLevelName[Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(_firstLevelIndex + _selectedLevelNumber))];
         }
     }
 }
