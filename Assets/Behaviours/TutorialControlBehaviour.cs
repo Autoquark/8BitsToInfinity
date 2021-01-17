@@ -13,7 +13,9 @@ namespace Assets.Behaviours
     class TutorialControlBehaviour : MonoBehaviour
     {
         [SerializeField]
-        GameObject Background;
+        private GameObject Background;
+        [SerializeField]
+        private PauseMenuBehaviour PauseMenu;
 
         [Serializable]
         class Step
@@ -29,11 +31,10 @@ namespace Assets.Behaviours
         [SerializeField]
         Step[] Steps;
 
-        //        Lazy<PauseControlBehaviour> _pauseController = new Lazy<PauseControlBehaviour>(FindObjectOfType<PauseControlBehaviour>);
         static readonly Lazy<Material> Attract = new Lazy<Material>(() => Resources.Load<Material>("Pipe Palette/BasicPipeAttract"));
         Dictionary<MeshRenderer, Material[]> ResetMaterials = new Dictionary<MeshRenderer, Material[]>();
-        static readonly Lazy<LevelControllerBehaviour> LevelController = new Lazy<LevelControllerBehaviour>(FindObjectOfType<LevelControllerBehaviour>);
-        static readonly Lazy<LevelUiBehaviour> LevelUiController = new Lazy<LevelUiBehaviour>(FindObjectOfType<LevelUiBehaviour>);
+        readonly Lazy<LevelControllerBehaviour> LevelController = new Lazy<LevelControllerBehaviour>(FindObjectOfType<LevelControllerBehaviour>);
+        readonly Lazy<LevelUiBehaviour> LevelUiController = new Lazy<LevelUiBehaviour>(FindObjectOfType<LevelUiBehaviour>);
 
         int _step = 0;
 
@@ -80,8 +81,11 @@ namespace Assets.Behaviours
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Return)
-                || Input.GetKeyDown(KeyCode.KeypadEnter))
+            Background.SetActive(_step < Steps.Length && !PauseMenu.gameObject.activeInHierarchy);
+
+            if (Background.activeInHierarchy
+                && (Input.GetKeyDown(KeyCode.Return)
+                || Input.GetKeyDown(KeyCode.KeypadEnter)))
             {
                 EndPhase();
 
