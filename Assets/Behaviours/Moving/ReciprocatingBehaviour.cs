@@ -36,6 +36,8 @@ namespace Assets.Behaviours.Moving
         }
         [SerializeField]
         Phase StartingPosition = Phase.Rising;
+        [SerializeField]
+        private bool SceneryMode = false;
 
         private float Offset = 0.0f;
         private Vector3 BasePosition;
@@ -44,8 +46,15 @@ namespace Assets.Behaviours.Moving
 
         private void Awake()
         {
-            BasePosition = transform.position;
-            BaseRotation = transform.rotation;
+            if (!SceneryMode)
+            {
+                BasePosition = transform.position;
+                BaseRotation = transform.rotation;
+            } else
+            {
+                BasePosition = transform.localPosition;
+                BaseRotation = transform.localRotation;
+            }
 
             switch (StartingPosition)
             {
@@ -122,6 +131,9 @@ namespace Assets.Behaviours.Moving
             Rigidbody rb = GetComponent<Rigidbody>();
             if (rb)
             {
+                // we don't support local transforms with RigidBodies
+                UnityEngine.Assertions.Assert.IsTrue(!SceneryMode);
+
                 rb.position = BasePosition + position;
                 if (Rotation != Quaternion.identity)
                 {
@@ -130,10 +142,20 @@ namespace Assets.Behaviours.Moving
             }
             else
             {
-                transform.position = BasePosition + position;
-                if (Rotation != Quaternion.identity)
+                if (!SceneryMode)
                 {
-                    transform.rotation = Quaternion.Lerp(BaseRotation, Rotation * BaseRotation, Offset);
+                    transform.position = BasePosition + position;
+                    if (Rotation != Quaternion.identity)
+                    {
+                        transform.rotation = Quaternion.Lerp(BaseRotation, Rotation * BaseRotation, Offset);
+                    }
+                } else
+                {
+                    transform.localPosition = BasePosition + position;
+                    if (Rotation != Quaternion.identity)
+                    {
+                        transform.localRotation = Quaternion.Lerp(BaseRotation, Rotation * BaseRotation, Offset);
+                    }
                 }
             }
         }
@@ -147,8 +169,17 @@ namespace Assets.Behaviours.Moving
                 Axis == TranslationAxis.X ? DistanceTravelled : 0.0f,
                 Axis == TranslationAxis.Y ? DistanceTravelled : 0.0f,
                 Axis == TranslationAxis.Z ? DistanceTravelled : 0.0f);
-            transform.position += position;
-            transform.rotation = Rotation.normalized * transform.rotation;
+
+            if (!SceneryMode)
+            {
+                transform.position += position;
+                transform.rotation = Rotation.normalized * transform.rotation;
+            } 
+            else
+            {
+                transform.localPosition += position;
+                transform.localRotation = Rotation.normalized * transform.localRotation;
+            }
 
             foreach (var child in GetComponentsInChildren<MeshFilter>())
             {

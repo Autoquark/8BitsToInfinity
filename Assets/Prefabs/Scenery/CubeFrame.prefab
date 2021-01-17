@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 8029027405584561964}
   - component: {fileID: 5988428538319688153}
   m_Layer: 0
-  m_Name: BottomRight
+  m_Name: BottomRightTrim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,6 +215,7 @@ MonoBehaviour:
   Dwell: 0.1
   DistanceTravelled: 1.6
   StartingPosition: 0
+  SceneryMode: 1
 --- !u!1 &5559693028660476154
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +387,7 @@ GameObject:
   - component: {fileID: 4457136647205679429}
   - component: {fileID: 5420780472912069476}
   m_Layer: 0
-  m_Name: TopLeft
+  m_Name: TopLeftTrim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,6 +472,7 @@ MonoBehaviour:
   Dwell: 0.1
   DistanceTravelled: -1.6
   StartingPosition: 0
+  SceneryMode: 1
 --- !u!1 &7869028797953352170
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +486,7 @@ GameObject:
   - component: {fileID: 2940523135440443333}
   - component: {fileID: 5357578615088554208}
   m_Layer: 0
-  m_Name: TopRight
+  m_Name: TopRightTrim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -569,6 +571,7 @@ MonoBehaviour:
   Dwell: 0.1
   DistanceTravelled: -1.6
   StartingPosition: 0
+  SceneryMode: 1
 --- !u!1 &8057557978241563228
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,7 +585,7 @@ GameObject:
   - component: {fileID: 7433557457470043908}
   - component: {fileID: 7565891628123138063}
   m_Layer: 0
-  m_Name: BottomLeft
+  m_Name: BottomLeftTrim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -667,6 +670,7 @@ MonoBehaviour:
   Dwell: 0.1
   DistanceTravelled: 1.6
   StartingPosition: 0
+  SceneryMode: 1
 --- !u!1 &8865358006529714281
 GameObject:
   m_ObjectHideFlags: 0

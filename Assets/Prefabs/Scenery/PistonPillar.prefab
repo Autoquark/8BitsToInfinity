@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3220876838596316864}
   - component: {fileID: 2450285648483682017}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Cube Trim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   Dwell: 2
   DistanceTravelled: 1
   StartingPosition: 1
+  SceneryMode: 1
 --- !u!1 &8811516636710277000
 GameObject:
   m_ObjectHideFlags: 0
