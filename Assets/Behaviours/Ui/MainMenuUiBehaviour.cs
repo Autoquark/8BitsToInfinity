@@ -38,7 +38,10 @@ namespace Assets.Behaviours.Ui
 
         private void Start()
         {
-            _cameraControl.Value?.SetAutomaticMode();
+            if (_cameraControl.Value != null)
+            {
+                _cameraControl.Value.SetAutomaticMode();
+            }
         }
 
         private void Update()
@@ -50,7 +53,10 @@ namespace Assets.Behaviours.Ui
                 {
                     _currentMenu = _menuPositions.Length - 1;
                 }
-                _cameraControl.Value?.AnimateTo(_menuPositions[_currentMenu]);
+                if (_cameraControl.Value != null)
+                {
+                    _cameraControl.Value.AnimateTo(_menuPositions[_currentMenu]);
+                }
             }
             else if(Input.GetKeyDown(KeyCode.RightArrow))
             {
@@ -59,7 +65,10 @@ namespace Assets.Behaviours.Ui
                 {
                     _currentMenu = 0;
                 }
-                _cameraControl.Value?.AnimateTo(_menuPositions[_currentMenu]);
+                if (_cameraControl.Value != null)
+                {
+                    _cameraControl.Value.AnimateTo(_menuPositions[_currentMenu]);
+                }
             }
 
             _menuPositions[_currentMenu].UiRoot.SetActive(true);

@@ -21,7 +21,7 @@ namespace Assets.Behaviours
 
         private float _keyboardPivotSensitivity = 50;
         private float _keyboardPanSensitivity = 20;
-        private float _keyboardRotateSensitivity = 150;
+        //private float _keyboardRotateSensitivity = 150;
 
         private float _maxDistance = 20;
         private float _minDistance = 5;
