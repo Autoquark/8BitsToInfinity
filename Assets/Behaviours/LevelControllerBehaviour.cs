@@ -10,10 +10,8 @@ namespace Assets.Behaviours
 {
     class LevelControllerBehaviour : MonoBehaviour
     {
-        [SerializeField]
         public bool MainMenuMode = false;
 
-        [SerializeField]
         public bool Enabled = true;
 
         public int BallsInGoal { get; set; } = 0;

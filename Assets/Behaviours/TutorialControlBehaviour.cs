@@ -13,7 +13,7 @@ namespace Assets.Behaviours
     class TutorialControlBehaviour : MonoBehaviour
     {
         [SerializeField]
-        public GameObject Background;
+        GameObject Background;
 
         [Serializable]
         class Step
