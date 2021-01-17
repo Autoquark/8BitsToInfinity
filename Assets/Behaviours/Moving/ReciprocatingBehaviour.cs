@@ -15,11 +15,12 @@ namespace Assets.Behaviours.Moving
         Z
     }
 
-    [RequireComponent(typeof(Rigidbody))]
     class ReciprocatingBehaviour : MonoBehaviour
     {
         [SerializeField]
         TranslationAxis Axis = TranslationAxis.X;
+        [SerializeField]
+        Quaternion Rotation;
         [SerializeField]
         private float SecondsForCompleteCycle = 3.0f;
         [SerializeField]
@@ -38,11 +39,13 @@ namespace Assets.Behaviours.Moving
 
         private float Offset = 0.0f;
         private Vector3 BasePosition;
+        private Quaternion BaseRotation;
         private float DwellTimer = 0.0f;
 
         private void Awake()
         {
             BasePosition = transform.position;
+            BaseRotation = transform.rotation;
 
             switch (StartingPosition)
             {
@@ -60,6 +63,8 @@ namespace Assets.Behaviours.Moving
                 case Phase.Down:
                     break;
             }
+
+            Rotation.Normalize();
         }
 
         private void FixedUpdate()
@@ -115,7 +120,22 @@ namespace Assets.Behaviours.Moving
                 Axis == TranslationAxis.Z ? movement : 0.0f);
 
             Rigidbody rb = GetComponent<Rigidbody>();
-            rb.position = BasePosition + position;
+            if (rb)
+            {
+                rb.position = BasePosition + position;
+                if (Rotation != Quaternion.identity)
+                {
+                    rb.rotation = Quaternion.Lerp(BaseRotation, Rotation * BaseRotation, Offset);
+                }
+            }
+            else
+            {
+                transform.position = BasePosition + position;
+                if (Rotation != Quaternion.identity)
+                {
+                    transform.rotation = Quaternion.Lerp(BaseRotation, Rotation * BaseRotation, Offset);
+                }
+            }
         }
 
         private void OnDrawGizmos()
@@ -128,6 +148,7 @@ namespace Assets.Behaviours.Moving
                 Axis == TranslationAxis.Y ? DistanceTravelled : 0.0f,
                 Axis == TranslationAxis.Z ? DistanceTravelled : 0.0f);
             transform.position += position;
+            transform.rotation = Rotation.normalized * transform.rotation;
 
             foreach (var child in GetComponentsInChildren<MeshFilter>())
             {

@@ -3,11 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 namespace Assets
 {
-    static class LevelNames
+    static class LevelData
     {
+        static LevelData()
+        {
+            if (_lastLevelIndex == -1)
+            {
+                _lastLevelIndex = SceneManager.sceneCountInBuildSettings - 1;
+            }
+        }
+
+        public static int _firstLevelIndex = 1;
+        public static int _lastLevelIndex = -1;
+        public static int _levelCount => _lastLevelIndex - _firstLevelIndex + 1;
+
         public static IReadOnlyDictionary<string, string> LevelNamesBySceneName = new Dictionary<string, string>
         {
             { "Level_Catapult", "Catapult" },

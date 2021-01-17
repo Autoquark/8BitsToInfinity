@@ -15,7 +15,6 @@ namespace Assets.Behaviours.Moving
         Z
     }
 
-    [RequireComponent(typeof(Rigidbody))]
     class SpinningBehaviour : MonoBehaviour
     {
         [SerializeField]
@@ -48,7 +47,15 @@ namespace Assets.Behaviours.Moving
                 Axis == RotationAxis.Y ? CurrentAngle : 0.0f,
                 Axis == RotationAxis.Z ? CurrentAngle : 0.0f);
 
-            GetComponent<Rigidbody>().rotation = BaseRotation * rotation;
+            var rigidBody = GetComponent<Rigidbody>();
+            if (rigidBody)
+            {
+                rigidBody.rotation = BaseRotation * rotation;
+            }
+            else
+            {
+                transform.rotation = BaseRotation * rotation;
+            }
         }
     }
 }

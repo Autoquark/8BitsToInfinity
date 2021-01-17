@@ -16,7 +16,7 @@ namespace Assets.Behaviours.Ui
 
         private void OnEnable()
         {
-            _levelName.text = $"\"{LevelNames.LevelNamesBySceneName[SceneManager.GetActiveScene().name]}\"";
+            _levelName.text = $"\"{LevelData.LevelNamesBySceneName[SceneManager.GetActiveScene().name]}\"";
         }
     }
 }

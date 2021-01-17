@@ -26,5 +26,10 @@ namespace Assets.Behaviours.Ui
             _nextLevelButton.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
             _mainMenuButton.onClick.AddListener(() => SceneManager.LoadScene("Level_Machine"));
         }
+
+        private void OnEnable()
+        {
+            _nextLevelButton.gameObject.SetActive(SceneManager.GetActiveScene().buildIndex != LevelData._lastLevelIndex);
+        }
     }
 }

@@ -16,29 +16,18 @@ namespace Assets.Behaviours.Ui
         private Text _selectedLevelText;
 
         private int _selectedLevelNumber = 0;
-        private int _firstLevelIndex = 1;
-        private int _lastLevelIndex = -1;
-        private int _levelCount => _lastLevelIndex - _firstLevelIndex;
-
-        private void Start()
-        {
-            if(_lastLevelIndex == -1)
-            {
-                _lastLevelIndex = SceneManager.sceneCountInBuildSettings - 1;
-            }
-        }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene(_firstLevelIndex + _selectedLevelNumber);
+                SceneManager.LoadScene(LevelData._firstLevelIndex + _selectedLevelNumber);
                 return;
             }
             if(Input.GetKeyDown(KeyCode.DownArrow))
             {
                 _selectedLevelNumber++;
-                if(_selectedLevelNumber == _levelCount)
+                if(_selectedLevelNumber == LevelData._levelCount)
                 {
                     _selectedLevelNumber = 0;
                 }
@@ -48,12 +37,12 @@ namespace Assets.Behaviours.Ui
                 _selectedLevelNumber--;
                 if (_selectedLevelNumber == -1)
                 {
-                    _selectedLevelNumber = _levelCount - 1;
+                    _selectedLevelNumber = LevelData._levelCount - 1;
                 }
             }
 
             // SceneManager.GetSceneByBuildIndex returns an invalid scene if the scene has not been loaded, so we have to do this
-            _selectedLevelText.text = LevelNames.LevelNamesBySceneName[Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(_firstLevelIndex + _selectedLevelNumber))];
+            _selectedLevelText.text = LevelData.LevelNamesBySceneName[Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(LevelData._firstLevelIndex + _selectedLevelNumber))];
         }
     }
 }
