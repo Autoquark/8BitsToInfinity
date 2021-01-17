@@ -122,10 +122,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Axis: 1
+  Rotation: {x: 0, y: 0, z: 0, w: 0}
   SecondsForCompleteCycle: 3
   Dwell: 0.2
   DistanceTravelled: 1
   StartingPosition: 1
+  SceneryMode: 0
 --- !u!114 &494721988132230567
 MonoBehaviour:
   m_ObjectHideFlags: 0
