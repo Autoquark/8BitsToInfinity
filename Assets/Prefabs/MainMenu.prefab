@@ -148,7 +148,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 15
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -159,36 +159,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Sounds
-
-    Rolling sound adapted from: <a href="https://freesound.org/people/soundmast123/sounds/466031/">"foosball
-    loop sound effect"</a> by soundmast123
-
-    Ball dropping sound adapted from:
-    <a href="https://freesound.org/people/NeatoEnt/sounds/458137/">"Ball on table.wav"</a>
-    by NeatoEnt
-
-    Ball hit sounds adapted from: <a href="https://freesound.org/people/bsumusictech/sounds/62331/">"Pool
-    balls.wav"</a> by bsumusictech
-
-    Gear sounds adapted from: <a href="https://freesound.org/people/Vurca/sounds/315753/">"Running
-    Gear"</a> by Vurca
-
-    
-
-    Art
-
-    <a href="https://opengameart.org/content/space-skyboxes-0">"Outer
-    Space Skybox"</a> by StumpyStrust
-
-    Cel Shader based on <a href="https://danielilett.com/2020-03-21-tut5-urp-cel-shading/">Cel
-    Shader Tutorial</a> by Daniel Ilett
-
-    <a href="https://github.com/merpheus-dev/BlackHoleShader">Black
-    Hole Shader</a> by Mert Kirimgeri
-
-    <a href="http://clipart-library.com/clipart/lever-cliparts_15.htm">"level
-    clipart"</a> from clipart-library.com'
+  m_Text: "<b>Sounds</b>\r\nRolling sound adapted from: \"foosball loop sound effect\"
+    by soundmast123\r\n  https://freesound.org/people/soundmast123/sounds/466031/\r\nBall
+    dropping sound adapted from: \"Ball on table.wav\" by NeatoEnt\r\n  https://freesound.org/people/NeatoEnt/sounds/458137/\r\nBall
+    hit sounds adapted from: \"Pool balls.wav\" by bsumusictech\r\n  https://freesound.org/people/bsumusictech/sounds/62331/\r\nGear
+    sounds adapted from: \"Running Gear\" by Vurca\r\n  https://freesound.org/people/Vurca/sounds/315753/\r\n\r\n\r\n<b>Art</b>\r\n\"Outer
+    Space Skybox\" by StumpyStrust\r\n  https://opengameart.org/content/space-skyboxes-0\r\nCel
+    Shader based on Cel Shader Tutorial by Daniel Ilett\r\n  https://danielilett.com/2020-03-21-tut5-urp-cel-shading/\r\n\"level
+    clipart\" from clipart-library.com\r\n  http://clipart-library.com/clipart/lever-cliparts_15.htm"
 --- !u!114 &625820428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,17 +348,17 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Name1: Role
+  m_Text: 'Ian Badcoe
 
-    Name2: Role
+    James Badcoe
 
-    Nathan Hahn: Role'
+    Nathan Hahn'
 --- !u!114 &1134548585
 MonoBehaviour:
   m_ObjectHideFlags: 0
