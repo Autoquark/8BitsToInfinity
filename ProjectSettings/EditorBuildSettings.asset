@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level_Machine.unity
     guid: 32e804e26dd274c4aab3493574a9e776
   - enabled: 1
+    path: Assets/Scenes/Completion.unity
+    guid: 211960e355b5d3e44ace55de30cbb908
+  - enabled: 1
     path: Assets/Scenes/Level_Tutorial.unity
     guid: 48f04d15d8ae4ac4a8017c6e00ae37c0
   - enabled: 1

@@ -17,7 +17,7 @@ namespace Assets
             }
         }
 
-        public static int _firstLevelIndex = 1;
+        public static int _firstLevelIndex = 2;
         public static int _lastLevelIndex = -1;
         public static int _levelCount => _lastLevelIndex - _firstLevelIndex + 1;
 
